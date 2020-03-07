@@ -3,6 +3,7 @@ import { Route, BrowserRouter } from 'react-router-dom';
 
 import List from './list';
 import Input from './input';
+import Dash from './Pages/Dashboard/Dashboard';
 
 const Main = () => {
 	return (
@@ -13,6 +14,7 @@ const Main = () => {
 					<Route exact path="/" component={List} />
 					<Route path="/input" component={Input} />
 					<Route path="/update" component={Input} />
+					<Route path="/dashboard" component={Dash} />
 				</center>
 			</div>
 		</BrowserRouter>
