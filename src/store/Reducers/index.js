@@ -1,108 +1,47 @@
-import { ActionTypes } from '../Actions/ActionsTypes';
+import TodoActions from "../Actions";
+
+// import ActionTypes from '../actions/ActionsTypes';
 
 const INITIAL_STATE = {
     todos: [],
-    isLoading: false
+    editingItem: null // {}
 }
 
+// action = {type:"", payload:{}||number||""}
 function TodoReducer(state = INITIAL_STATE, action) {
     console.log(action);
     switch (action.type) {
 
-        // CREATE || ADD
-        case ActionTypes.CREATE_TODO: {
+        // case ActionTypes.ADD: {
+        case 'ADD': {
             return {
                 ...state,
-                isLoading: true
-            }
-        }
-        case ActionTypes.CREATE_TODO_SUCCESS: {
-            return {
-                ...state,
-                isLoading: false,
                 todos: [...state.todos, action.payload]
             }
         }
-        case ActionTypes.CREATE_TODO_FAILED: {
-            return {
-                ...state,
-                isLoading: false,
-            }
-        }
 
-        // GET
-
-        case ActionTypes.GET_TODO: {
-            return {
-                ...state,
-                isLoading: true
-            }
-        }
-        case ActionTypes.GET_TODO_SUCCESS: {
-            return {
-                ...state,
-                isLoading: false,
-                todos: action.payload
-            }
-        }
-        case ActionTypes.GET_TODO_FAILED: {
-            return {
-                ...state,
-                isLoading: false,
-            }
-        }
-
-        // DELETE
-        case ActionTypes.DELETE_TODO: {
-            return {
-                ...state,
-                isLoading: true
-            }
-        }
-        case ActionTypes.DELETE_TODO_SUCCESS: {
+        // case ActionTypes.UPDATE: {
+        case 'UPDATE': {
             const todos = [...state.todos]
-            const index = todos.findIndex((todo) => todo._id === action.payload)
-            todos.splice(index, 1)
-            return {
-                ...state,
-                isLoading: false,
-                todos
-            }
-        }
-
-        case ActionTypes.DELETE_TODO_FAILED: {
-            return {
-                ...state,
-                isLoading: false,
-            }
-        }
-
-        // UDDATE
-        case ActionTypes.UPDATE_TODO: {
-            return {
-                ...state,
-                isLoading: true
-            }
-        }
-        case ActionTypes.UPDATE_TODO_SUCCESS: {
-            const todos = [...state.todos]
-            const index = todos.findIndex((todo) => todo._id === action.payload._id)
+            const index = todos.findIndex((todo) => todo.id === action.payload.id)
             todos.splice(index, 1, action.payload)
             return {
                 ...state,
                 todos,
-                editingItem: null,
-                isLoading: false,
+                editingItem: null
             }
         }
 
-        case ActionTypes.UPDATE_TODO_FAILED: {
+        // case ActionTypes.DELETE: {
+        case 'DELETE': {
+            const todos = [...state.todos]
+            const index = todos.findIndex((todo) => todo.id === action.payload)
+            todos.splice(index, 1)
             return {
                 ...state,
-                isLoading: false,
+                todos
             }
         }
-
         case 'EDIT': {
             return {
                 ...state,

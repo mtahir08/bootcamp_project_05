@@ -12,8 +12,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        Add: (obj) => dispatch(TodoActions.Add(obj)),
-        Update: (obj) => dispatch(TodoActions.Update(obj))
+        // Add: (obj) => dispatch(TodoActions.Add(obj))
+        Add: (obj) => dispatch({ type: 'ADD', payload: obj }),
+        // update: (obj) => dispatch(TodoActions.update(obj))
+        Update: (obj) => dispatch({ type: 'UPDATE', payload: obj })
+
     }
 }
 
@@ -23,7 +26,7 @@ const Input = (props) => {
     useEffect(() => {
         console.log(props.editingItem);
         if (props.editingItem) {
-            setTodo(props.editingItem.text)
+            setTodo(props.editingItem.name)
         }
     }, [props.editingItem])
 
@@ -40,10 +43,13 @@ const Input = (props) => {
                 if (props.editingItem) {
                     props.Update({
                         ...props.editingItem,
-                        text: todo
+                        name: todo
                     })
                 } else {
-                    props.Add({ text: todo })
+                    props.Add({
+                        id: parseInt(Math.random() * 10000),
+                        name: todo
+                    })
                 }
             }
         }}> {props.editingItem ? "Update" : "Add"} </button>

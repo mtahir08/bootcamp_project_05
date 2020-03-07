@@ -12,26 +12,26 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        get: () => dispatch(TodoActions.Get()),
-        delete: (id) => dispatch(TodoActions.Delete(id)),
-        edit: (obj) => dispatch(TodoActions.Edit(obj)),
+        // delete: (id) => {
+        //     return dispatch(TodoActions.Delete(id))
+        // },
+        delete: (id) => {
+            return dispatch({ type: 'DELETE', payload: id })
+        },
+        // edit: (obj) => dispatch(TodoActions.Edit(obj))
+        edit: (obj) => dispatch({ type: 'EDIT', payload: obj })
     }
 }
 
 
 const List = (props) => {
-
-    useEffect(() => {
-        props.get();
-    }, [])
-
     let rows = props.todos.map((item, i) => (
         <tr key={i}>
-            <td>{(i + 1)}</td>
-            <td>{item.text}</td>
+            <td>{item.id}</td>
+            <td>{item.name}</td>
             <td>
                 <button onClick={() => { props.edit(item) }}>Edit</button>
-                <button onClick={() => { props.delete(item._id) }}>Delete</button>
+                <button onClick={() => { props.delete(item.id) }}>Delete</button>
             </td>
         </tr>
     ));
@@ -41,6 +41,7 @@ const List = (props) => {
             <tr>
                 <th>S.no</th>
                 <th>Name</th>
+                {/* <th>Class</th> */}
                 <th></th>
             </tr>
         </thead>
