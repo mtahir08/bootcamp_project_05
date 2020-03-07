@@ -115,7 +115,7 @@ const List = (props) => {
 		filterData()
 	}
 	return (
-		<div>
+		<div className="userContainer">
 			<div className="filter">
 				<span className="SelectContainexr" >
 					Status

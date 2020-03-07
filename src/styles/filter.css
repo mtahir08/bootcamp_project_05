@@ -1,9 +1,12 @@
 .table{
-    
+ margin-top: 40px;
+ /* backgrou`:"#212529" */
+ color: white;
 }
 .filter{
     flex-direction: row;
     display: inline;
+    /* color: white; */
 }
 .selectionButton{
     height: 35px;
@@ -22,7 +25,11 @@
     border: 1px solid black;
     width: 100px;
     height: 40px;
+    /* color:white; */
 
+}
+.userContainer{
+    color:white;
 }
 /* .dataRow{
     border: 1px solid black;

@@ -7,10 +7,10 @@ import Filter from './Pages/filter';
 
 const Main = () => {
 	return (
-		<BrowserRouter>
+		<BrowserRouter >
 			<div>
 				<center>
-					<h1>Note App</h1>
+					<h1>Users</h1>
 					<Route exact path="/" component={Filter} />
 					<Route path="/input" component={Input} />
 					<Route path="/update" component={Input} />
