@@ -5,6 +5,8 @@ import './index.css';
 import Main from './main';
 import * as serviceWorker from './serviceWorker';
 import MyStore from './store';
+
+
 ReactDOM.render(
 	<Provider store={MyStore}>
 		<Main />
