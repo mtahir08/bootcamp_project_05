@@ -1,4 +1,5 @@
 
+
 const TodoActions = {
     Add: (obj) => {
         console.log({ obj });
@@ -13,6 +14,9 @@ const TodoActions = {
     Edit: (obj) => {
         return { type: 'EDIT', payload: obj }
     },
+    setData:(data)=>{
+        return {type:'SETDATA',payload:data}
+    }
 }
 
 export default TodoActions 

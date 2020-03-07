@@ -2,7 +2,7 @@ const ActionTypes = {
     ADD: "ADD",
     UPDATE: "UPDATE",
     DELETE: "DELETE",
-    GET: "GET"
+    SETDATA: "SETDATA",
 }
 
 export default ActionTypes
