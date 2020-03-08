@@ -9,28 +9,14 @@ export default class Login extends Component {
         password: ''
 
     }
-    // componentDidMount() {
-    //     console.log(process.env);
-    // }
-    
+
     handleEmailField = (e) => {
         this.setState({ email: e.target.value })
-        console.log(e.target.value)
     }
     handlePasswordField = (e) => {
         this.setState({ password: e.target.value })
-        console.log(e.target.value)
     }
     handleSumbit = () => {
-
-        // console.log('bhai me idhar hn')
-
-        // const data = { email: this.state.email, password: this.state.password }
-        // console.log(data)
-        // const url = 'https://uitedemo.herokuapp.com/auth/signin';
-        // const url = 
-
-        
 
         fetch(process.env.REACT_APP_LOGINAPI, {
             method: 'POST',
@@ -60,12 +46,12 @@ export default class Login extends Component {
 
                 <div className="form-group">
                     <label>Email address</label>
-                    <input type="email" className="form-control" placeholder="Enter email" onChange={this.handleEmailField} />
+                    <input type="email" className="form-control" placeholder="Enter email" onChange={this.handleEmailField} value={this.state.email} />
                 </div>
 
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" onChange={this.handlePasswordField} />
+                    <input type="password" className="form-control" placeholder="Enter password" onChange={this.handlePasswordField} value={this.state.password} />
                 </div>
 
                 <div className="form-group">

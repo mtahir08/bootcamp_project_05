@@ -1,61 +1,42 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap'
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
+function UserDetail(props) {
 
-function UserDetail() {
-    const { userId } = useParams()
-    
     const [userDetail, setUserDetail] = useState([])
-    const [isLoading,setIsLoading] = useState(false)
-
+    const [isLoading, setIsLoading] = useState(false)
     useEffect(() => {
         setIsLoading(true)
-        fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
-            .then(response => response.json())
-            .then(response => {
-                setUserDetail([response])
-                setIsLoading(false)
-            })
+        const data = props.history.location.state.user
+        setUserDetail(data)
     }, [])
-    const userData = !isLoading ?  userDetail.map(user => {
-        return (
-            <tr key={user.id}>
-                <td>{user.id}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.phone}</td>
-                <td>{user.company.bs}</td>
-                <td>2003</td>
-                <td>{user.address.street}</td>
-                <td>{user.address.city}</td>
-                <td>{user.company.name}</td>
-                <td><Link to="/dashboard">Go Back</Link></td>
-            </tr>
-        )
-    }) : <h2>Loading...</h2>
     return (
         <div className="container">
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Name</th>
+                        <th>ID</th>
+                        <th>Gender</th>
                         <th>Email</th>
-                        <th>Phone</th>
-                        <th>Association Office Name</th>
-                        <th>Year</th>
-                        <th>Street</th>
-                        <th>City</th>
-                        <th>Company</th>
+                        <th>Updated at</th>
+                        <th>Created At</th>
                         <th>Action</th>
                     </tr>
+
                 </thead>
                 <tbody>
-                    {userData}
+                    <tr key={userDetail._id}>
+                        <td>{userDetail._id}</td>
+                        <td>{userDetail.gender}</td>
+                        <td>{userDetail.email}</td>
+                        <td>{userDetail.updatedAt}</td>
+                        <td>{userDetail.createdAt}</td>
+                        <td><Link to="/dashboard">Go Back</Link></td>
+                    </tr>
                 </tbody>
             </Table>
         </div>
     )
 }
-export { UserDetail } 
+export default UserDetail;

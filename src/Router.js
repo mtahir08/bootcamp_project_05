@@ -5,8 +5,9 @@ import Input from './input';
 import Login from './Pages/login';
 import Signup from './Pages/signup';
 import { CloudinaryImagePage } from './Pages/CloudinaryImagePage';
-import Dash from './Pages/Dashboard';
-import { UserDetail } from './Pages/Dashboard';
+import Dash, { UserDetail } from './Pages/Dashboard';
+import { ReceiptDetails } from './Pages/Receipt.Detail';
+import ReceiptAdd from './Pages/receiptAdd';
 
 
 const Routes = () => {
@@ -20,6 +21,9 @@ const Routes = () => {
 				<Route path="/update" component={Input} />
 				<Route path="/cloudinary" component={CloudinaryImagePage} />
 				<Route path="/dashboard/:userId" component={UserDetail} />
+				<Route path="/receipt/:userId" component={ReceiptDetails} />
+				<Route exact path="/receipt/add" component={ReceiptAdd} />
+
 			</div>
 		</BrowserRouter>
 	);

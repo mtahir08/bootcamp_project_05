@@ -1,4 +1,4 @@
-import ActionTypes  from './ActionsTypes' ;
+import ActionTypes from './ActionsTypes';
 const base_url = ' https://uitedemo.herokuapp.com/api/users'
 
 const TodoActions = {
@@ -7,18 +7,18 @@ const TodoActions = {
         return (dispatch) => {
             dispatch({ type: ActionTypes.ADD })
             const url = `${base_url}`
-           const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTY0YTI2ZmEyZDkwYTAwMDRhYmUxNjQiLCJleHAiOjE1ODM2NjczNjgsImlhdCI6MTU4MzY2Mzc2OH0.AES4sswlycZPu-Nca29mzj1Cl9X3kDXDP0H6c4u7JQ4"
+            const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTY0YTI2ZmEyZDkwYTAwMDRhYmUxNjQiLCJleHAiOjE1ODM2NjczNjgsImlhdCI6MTU4MzY2Mzc2OH0.AES4sswlycZPu-Nca29mzj1Cl9X3kDXDP0H6c4u7JQ4"
 
 
             fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization':`Bearer ${token}` ,
-                    'Accept': 'application/json' ,
-                    'origin' : '' ,
-                    
-                    
+                    'Authorization': `Bearer ${token}`,
+                    'Accept': 'application/json',
+                    'origin': '',
+
+
                 },
                 body: JSON.stringify(obj)
             })
@@ -30,7 +30,7 @@ const TodoActions = {
                 })
                 .then((data) => {
                     dispatch({ type: ActionTypes.ADD, payload: data })
-                    console.log( 'data' , data)
+                    console.log('data', data)
                 })
                 .catch((error) => {
                     console.log({ error })
@@ -39,7 +39,7 @@ const TodoActions = {
         }
 
     },
-    
+
 }
 
 export default TodoActions 
