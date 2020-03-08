@@ -3,8 +3,9 @@ import { Route, BrowserRouter } from 'react-router-dom';
 
 import List from './list';
 import Input from './input';
+import Login from './Pages/login';
+import Signup from './Pages/signup';
 import Dash from './Pages/Dashboard/Dashboard';
-import Filter from './Pages/filter';
 
 const Main = () => {
 	return (
@@ -12,7 +13,7 @@ const Main = () => {
 			<div>
 				<center>
 					<h1>Users</h1>
-					<Route exact path="/" component={Filter} />
+					<Route exact path="/" component={Login} />
 					<Route path="/signup" component={Signup} ></Route>
 					<Route path="/input" component={Input} />
 					<Route path="/update" component={Input} />
