@@ -12,6 +12,7 @@ const Main = () => {
 				<center>
 					<h1>Users</h1>
 					<Route exact path="/" component={Filter} />
+					<Route path="/signup" component={Signup} ></Route>
 					<Route path="/input" component={Input} />
 					<Route path="/update" component={Input} />
 				</center>
