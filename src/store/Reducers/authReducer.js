@@ -1,21 +1,21 @@
 const INITIAL_STATE = {
-    user: {},
-    token: "",
-}
+	user: {},
+	token: ''
+};
 
 function authReducer(state = INITIAL_STATE, action) {
-    console.log(action);
-    switch (action.type) {
-
-        case 'SETDATA': {
-            return {
-                ...state,
-                user: action.payload,
-                token: action.payload.token
-            }
-        }
-        default: return state;
-    }
+	console.log(action);
+	switch (action.type) {
+		case 'SETDATA': {
+			return {
+				...state,
+				user: action.payload,
+				token: action.payload.token
+			};
+		}
+		default:
+			return state;
+	}
 }
 
 export { authReducer };
