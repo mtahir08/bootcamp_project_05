@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
 
-import List from './list';
 import Input from './input';
-import Filter from './Pages/filter';
+import Login from './Pages/login';
+import Signup from './Pages/signup';
 import { CloudinaryImagePage } from './Pages/CloudinaryImagePage';
 
 const Routes = () => {
@@ -12,7 +12,8 @@ const Routes = () => {
 			<div>
 				<center>
 					<h1>Users</h1>
-					<Route exact path="/" component={Filter} />
+					<Route exact path="/" component={Login} />
+					<Route exact path="/signup" component={Signup} />
 					<Route path="/input" component={Input} />
 					<Route path="/update" component={Input} />
 					<Route path="/cloudinary" component={CloudinaryImagePage} />
