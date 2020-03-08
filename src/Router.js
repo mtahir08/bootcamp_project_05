@@ -5,6 +5,7 @@ import Input from './input';
 import Login from './Pages/login';
 import Signup from './Pages/signup';
 import { CloudinaryImagePage } from './Pages/CloudinaryImagePage';
+import Dash from './Pages/Dashboard';
 
 const Routes = () => {
 	return (
@@ -14,6 +15,7 @@ const Routes = () => {
 					<h1>Users</h1>
 					<Route exact path="/" component={Login} />
 					<Route exact path="/signup" component={Signup} />
+					<Route exact path="/dashboard" component={Dash} />
 					<Route path="/input" component={Input} />
 					<Route path="/update" component={Input} />
 					<Route path="/cloudinary" component={CloudinaryImagePage} />

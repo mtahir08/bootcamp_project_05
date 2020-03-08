@@ -24,29 +24,28 @@ export default class Login extends Component {
         const url = 'https://uitedemo.herokuapp.com/auth/signin';
         fetch(url, {
             method: 'POST',
-            headers:{
-                'Content-Type':'application/json'
+            headers: {
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 email: `${this.state.email}`,
                 password: `${this.state.password}`
             })
         })
-        .then(resposne => resposne.json())
-        .then(data=>{
-            if(data.data.token)
-            {
+            .then(resposne => resposne.json())
+            .then(data => {
+                if (data.data.token) {
+                    console.log(data)
+                    localStorage.setItem("token", data.data.token)
+                    this.props.history.push('/dashboard');
+                }
                 console.log(data)
-                localStorage.setItem("token",data.data.token)
-                // this.props.push('/');
-            }
-            console.log(data)
-        
-        })
+
+            })
     }
     render() {
         return (
-            <div style={{width:400}} >
+            <div style={{ width: 400 }} >
                 <h3>Sign In</h3>
 
                 <div className="form-group">
@@ -71,9 +70,9 @@ export default class Login extends Component {
                     Forgot <a href="#">password?</a>
                 </p> */}
                 <button>
-                    
+
                     <Link to="/signup" >
-                    Sign Up
+                        Sign Up
                     </Link>
                 </button>
             </div>
