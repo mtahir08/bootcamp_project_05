@@ -1,20 +1,24 @@
 import React from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
 
-import List from './list';
-import Input from './input';
-import Filter from './Pages/filter';
+import Dash from './Pages/Dashboard';
+import UserDetail from './Pages/UserDetail';
+import Receipt from './Pages/Receipt';
+import { ReceiptDetails } from './Pages/Receipt.Detail';
+import receiptAdd from './Pages/receiptAdd';
 
 const Main = () => {
 	return (
-		<BrowserRouter >
+		<BrowserRouter>
 			<div>
 				<center>
-					<h1>Users</h1>
-					<Route exact path="/" component={Filter} />
-					<Route path="/signup" component={Signup} ></Route>
-					<Route path="/input" component={Input} />
-					<Route path="/update" component={Input} />
+					<h1>Note App</h1>
+					<Route exact path="/dashboard" component={Dash} />
+					<Route path="/dashboard/:userId" component={UserDetail} />
+					<Route exact path="/receipt" component={Receipt} />
+					<Route path="/receipt/123/:userId" component={ReceiptDetails} />
+					<Route exact path="/receipt/add" component={receiptAdd} />
+
 				</center>
 			</div>
 		</BrowserRouter>
