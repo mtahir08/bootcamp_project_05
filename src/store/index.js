@@ -1,8 +1,8 @@
 import { createStore } from 'redux';
 
-import { TodoReducer } from './Reducers';
+import { Dash } from './Reducers/Dash';
 
-let store = createStore(TodoReducer);
+let store = createStore(Dash);
 
 
 export default store;
