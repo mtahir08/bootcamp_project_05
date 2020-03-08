@@ -6,6 +6,8 @@ import Login from './Pages/login';
 import Signup from './Pages/signup';
 import { CloudinaryImagePage } from './Pages/CloudinaryImagePage';
 import Dash from './Pages/Dashboard';
+import { UserDetail } from './Pages/Dashboard';
+
 
 const Routes = () => {
 	return (
@@ -17,6 +19,7 @@ const Routes = () => {
 				<Route path="/input" component={Input} />
 				<Route path="/update" component={Input} />
 				<Route path="/cloudinary" component={CloudinaryImagePage} />
+				<Route path="/dashboard/:userId" component={UserDetail} />
 			</div>
 		</BrowserRouter>
 	);
