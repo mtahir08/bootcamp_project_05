@@ -13,8 +13,10 @@ class Dash extends Component {
         isLoading: false
     }
     componentDidMount() {
+        // const tokenObj = parse.json( localStorage.getItem(''));
         this.setState({ isLoading: true })
-        fetch('https://uitedemo.herokuapp.com/api/users', {
+        let url  = process.env.REACT_APP_DASHBOARDAPI
+        fetch(url, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -76,7 +78,9 @@ function UserDetail() {
 
     useEffect(() => {
         setIsLoading(true)
-        fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+        let url  = process.env.REACT_APP_DASHBOARDAPI
+        // fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+        fetch(url + userId )
             .then(response => response.json())
             .then(response => {
                 setUserDetail([response])
