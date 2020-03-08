@@ -11,7 +11,7 @@ const Main = () => {
 				<center>
 					<h1>Note App</h1>
 					<Route exact path="/dashboard" component={Dash} />
-					<Route exact path="/dashboard/:userId" component={UserDetail}/>
+					<Route path="/dashboard/:userId" component={UserDetail}/>
 						
 				</center>
 			</div>
