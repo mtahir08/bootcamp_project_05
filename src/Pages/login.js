@@ -1,8 +1,14 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
+import  AuthAction  from '../store/Actions/AuthAction'
 import { Link, Redirect } from "react-router-dom";
 
 
-export default class Login extends Component {
+class Login extends Component {
+    constructor(props){
+        super(props);
+    }
+
     state = {
         users: [],
         email: '',
@@ -22,17 +28,11 @@ export default class Login extends Component {
         console.log(e.target.value)
     }
     handleSumbit = () => {
-
-        // console.log('bhai me idhar hn')
-
+        // console.log("hell")
         // const data = { email: this.state.email, password: this.state.password }
         // console.log(data)
-        // const url = 'https://uitedemo.herokuapp.com/auth/signin';
-        // const url = 
-
-        
-
-        fetch(process.env.REACT_APP_LOGINAPI, {
+        const url = 'https://uitedemo.herokuapp.com/auth/signin';
+        fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -50,10 +50,12 @@ export default class Login extends Component {
                     this.props.history.push('/dashboard');
                 }
                 console.log(data)
-
+                console.log(this.props.SETDATA);
+                this.props.SETDATA(data.data.user);
             })
     }
-    render() {
+    render(props) {
+        console.log(props);
         return (
             <div style={{ width: 400 }} >
                 <h3>Sign In</h3>
@@ -90,3 +92,16 @@ export default class Login extends Component {
 
     }
 }
+
+function mapDispatchToProps(dispatch) {
+    
+    return {
+        SETDATA: (obj) => {
+            console.log(obj);
+            dispatch(AuthAction.setData(obj))
+        },
+        // // Update: (obj) => dispatch(TodoActions.Update(obj))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Login)
