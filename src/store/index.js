@@ -1,15 +1,11 @@
-// import { createStore } from 'redux';
+import { combineReducers } from 'redux';
 
 // import { TodoReducer } from './Reducers';
 
 // let store = createStore(TodoReducer);
 
+import { Dash } from './Reducers/Dash';
 
-// // store.subscribe(() => {
-// //     console.log("subscribe start")
-// //     console.log(store.getState())
-// //     console.log("subscribe end")
-// // })
 
 // export default store;
 
@@ -19,6 +15,7 @@ import thunk from "redux-thunk";
 import { TodoReducer } from './Reducers';
 
 const middleware = applyMiddleware(thunk);
-let store = createStore(TodoReducer, middleware);
+const rootReducer = combineReducers(TodoReducer, Dash)
+let store = createStore(rootReducer, middleware);
 
 export default store;
