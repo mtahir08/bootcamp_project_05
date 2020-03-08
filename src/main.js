@@ -7,17 +7,16 @@ import Input from './input';
 import Login from './Pages/login';
 import Signup from './Pages/signup';
 import Dash from './Pages/Dashboard';
-import  {UserDetail} from './Pages/Dashboard';
+import { UserDetail } from './Pages/Dashboard';
 
 const Main = () => {
 	return (
 		<BrowserRouter >
 			<div>
 				<center>
-					<h1>Users</h1>
-    			<h1>Note App</h1>
+					<h1>Note App</h1>
 					<Route exact path="/dashboard" component={Dash} />
-					<Route path="/dashboard/:userId" component={UserDetail}/>
+					<Route path="/dashboard/:userId" component={UserDetail} />
 					<Route exact path="/" component={Login} />
 					<Route path="/signup" component={Signup} ></Route>
 					<Route path="/input" component={Input} />
@@ -30,3 +29,13 @@ const Main = () => {
 };
 
 export default Main;
+
+// token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTY0OTIwYWEyZDkwYTAwMDRhYmUxNDEiLCJleHAiOjE1ODM2NTI5MTksImlhdCI6MTU4MzY0OTMxOX0.HDpQVnvPGu_HgCgMuu2A1QDO2aP7VXOzaJI2_LPk35c"
+// fetch(url, {
+// 	method: 'POST',
+// 	headers: {
+// 		// 'Content-Type': 'application/json',
+// 		'Authorization':`Bearer ${token}`
+// 	},
+// 	body: JSON.stringify(obj)
+// })
