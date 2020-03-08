@@ -11,15 +11,12 @@ const Routes = () => {
 	return (
 		<BrowserRouter >
 			<div>
-				<center>
-					<h1>Users</h1>
-					<Route exact path="/" component={Login} />
-					<Route exact path="/signup" component={Signup} />
-					<Route exact path="/dashboard" component={Dash} />
-					<Route path="/input" component={Input} />
-					<Route path="/update" component={Input} />
-					<Route path="/cloudinary" component={CloudinaryImagePage} />
-				</center>
+				<Route exact path="/" component={Login} />
+				<Route exact path="/signup" component={Signup} />
+				<Route exact path="/dashboard" component={Dash} />
+				<Route path="/input" component={Input} />
+				<Route path="/update" component={Input} />
+				<Route path="/cloudinary" component={CloudinaryImagePage} />
 			</div>
 		</BrowserRouter>
 	);
