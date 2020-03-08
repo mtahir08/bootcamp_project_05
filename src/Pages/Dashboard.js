@@ -12,29 +12,27 @@ class Dash extends Component {
         data: [],
         isLoading: false
     }
-    componentDidMount() {
+     componentDidMount() {
         this.setState({ isLoading: true })
-        fetch('https://uitedemo.herokuapp.com/api/users', {
+         fetch('https://uitedemo.herokuapp.com/api/users', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTY0YzRhOGY3MmNhYzAwMDRkODZiMjgiLCJleHAiOjE1ODM2NjU4NzQsImlhdCI6MTU4MzY2MjI3NH0.cjVo_WtgYdbpEuerghhaLojyfJdP4UiH4Zd1HshFe_E"
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTY0YzRhOGY3MmNhYzAwMDRkODZiMjgiLCJleHAiOjE1ODM2NzAyMzQsImlhdCI6MTU4MzY2NjYzNH0.LudbvSRTcMoYiUlq65K4f0o6RRKEhhhZeUYVpFbREq4"
             }
         })
-            .then((data) => {
-                data.json()
-                .then(res2 => {
-                    console.log('res2', res2.data.user)
-                    this.setState({ data: res2.data.user })
-
-                })
-
-            })
-            .catch((error) => {
-                console.log({ error })
-            })
-
-
+        .then((data) => { data.json()
+            .then( res2 => {console.log(  'res2' , res2)
+             this.setState({data : res2.data.user})
+        
+        }  )
+              
+        })
+        .catch((error) => {
+            console.log({ error })
+            })       
+      
+        
         // const response = await fetch("https://jsonplaceholder.typicode.com/users");
         // const data = await response.json()
         // this.setState({ data, isLoading: false })
@@ -42,15 +40,13 @@ class Dash extends Component {
     }
 
     render() {
-        console.log('data', this.state.data)
+        console.log('data',this.state.data)
         return (
             <div>
                 <div className="container">
                     <Table striped bordered hover>
                         <UserTable />
-                        <UserTableDetail userData={this.state.data} />
-                        
-
+                       <UserTableDetail userData={this.state.data} />
                     </Table>
                 </div>
 
