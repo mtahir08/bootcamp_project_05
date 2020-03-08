@@ -13,14 +13,15 @@ class Dash extends Component {
         isLoading: false
     }
     componentDidMount() {
-        // const tokenObj = parse.json( localStorage.getItem(''));
+        const tokenObj =  localStorage.getItem('token');
+        console.log(tokenObj);
         this.setState({ isLoading: true })
         let url  = process.env.REACT_APP_DASHBOARDAPI
         fetch(url, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTY0YzRhOGY3MmNhYzAwMDRkODZiMjgiLCJleHAiOjE1ODM2NzAyMzQsImlhdCI6MTU4MzY2NjYzNH0.LudbvSRTcMoYiUlq65K4f0o6RRKEhhhZeUYVpFbREq4"
+                "Authorization":  'Bearer ' + tokenObj //"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTY0YzRhOGY3MmNhYzAwMDRkODZiMjgiLCJleHAiOjE1ODM2NzAyMzQsImlhdCI6MTU4MzY2NjYzNH0.LudbvSRTcMoYiUlq65K4f0o6RRKEhhhZeUYVpFbREq4"
             }
         })
             .then((data) => {
@@ -80,6 +81,7 @@ function UserDetail() {
         setIsLoading(true)
         let url  = process.env.REACT_APP_DASHBOARDAPI
         // fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+        console.log (url + userId);
         fetch(url + userId )
             .then(response => response.json())
             .then(response => {
