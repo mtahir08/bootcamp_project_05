@@ -2,7 +2,10 @@ import React from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
 
 import Dash from './Pages/Dashboard';
-import  {UserDetail} from './Pages/Dashboard';
+import  {UserDetail} from './Pages/UserDetail';
+import  Receipt from './Pages/Receipt';
+import  {ReceiptDetails} from './Pages/Receipt.Detail';
+import receiptAdd from './Pages/receiptAdd';
 
 const Main = () => {
 	return (
@@ -12,6 +15,9 @@ const Main = () => {
 					<h1>Note App</h1>
 					<Route exact path="/dashboard" component={Dash} />
 					<Route exact path="/dashboard/:userId" component={UserDetail}/>
+					<Route exact path="/receipt" component={Receipt}/>
+					<Route exact path="/receipt/123/:userId" component={ReceiptDetails}/>
+					<Route exact path="/receipt/add" component={receiptAdd}/>
 						
 				</center>
 			</div>
