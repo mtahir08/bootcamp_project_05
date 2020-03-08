@@ -61,7 +61,7 @@ const List = (props) => {
 				<tbody>{rows}</tbody>
 			</table>
 			<Link to="/input">
-				<button className="button">Create Todo</button>
+				<button className="btn btn-danger">Create Todo</button>
 			</Link>
 		</div>
 	);
