@@ -1,0 +1,36 @@
+.table{
+ margin-top: 40px;
+ /* backgrou`:"#212529" */
+ color: white;
+}
+.filter{
+    flex-direction: row;
+    display: inline;
+    /* color: white; */
+}
+.selectionButton{
+    height: 35px;
+    width: 80px;
+    border-radius: 10px;
+    border-style: solid;
+    margin: 5px;
+}
+.selectionButton:focus{
+    /* border-colo:; */
+    outline-width: 0;
+    border-color: rgb(7, 148, 77);
+    border-width: 3px;
+}
+.SelectContainer{
+    border: 1px solid black;
+    width: 100px;
+    height: 40px;
+    /* color:white; */
+
+}
+.userContainer{
+    color:white;
+}
+/* .dataRow{
+    border: 1px solid black;
+} */

@@ -3,24 +3,23 @@ import { Route, BrowserRouter } from 'react-router-dom';
 
 import List from './list';
 import Input from './input';
-import Dash from './Pages/Dashboard/Dashboard';
 import Filter from './Pages/filter';
+import { CloudinaryImagePage } from './Pages/CloudinaryImagePage';
 
-const Main = () => {
+const Routes = () => {
 	return (
 		<BrowserRouter >
 			<div>
 				<center>
 					<h1>Users</h1>
 					<Route exact path="/" component={Filter} />
-					<Route path="/signup" component={Signup} ></Route>
 					<Route path="/input" component={Input} />
 					<Route path="/update" component={Input} />
-					<Route path="/dashboard" component={Dash} />
+					<Route path="/cloudinary" component={CloudinaryImagePage} />
 				</center>
 			</div>
 		</BrowserRouter>
 	);
 };
 
-export default Main;
+export default Routes;

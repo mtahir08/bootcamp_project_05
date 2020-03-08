@@ -48,7 +48,12 @@ function TodoReducer(state = INITIAL_STATE, action) {
                 editingItem: action.payload,
             }
         }
-
+        case 'SETDATA':{
+            return{
+                ...state ,
+                todos : action.payload
+            }
+        }
         default: return state;
     }
 }
