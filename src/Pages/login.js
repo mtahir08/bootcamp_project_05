@@ -9,6 +9,10 @@ export default class Login extends Component {
         password: ''
 
     }
+    // componentDidMount() {
+    //     console.log(process.env);
+    // }
+    
     handleEmailField = (e) => {
         this.setState({ email: e.target.value })
         console.log(e.target.value)
@@ -18,11 +22,17 @@ export default class Login extends Component {
         console.log(e.target.value)
     }
     handleSumbit = () => {
-        console.log("hell")
-        const data = { email: this.state.email, password: this.state.password }
-        console.log(data)
-        const url = 'https://uitedemo.herokuapp.com/auth/signin';
-        fetch(url, {
+
+        // console.log('bhai me idhar hn')
+
+        // const data = { email: this.state.email, password: this.state.password }
+        // console.log(data)
+        // const url = 'https://uitedemo.herokuapp.com/auth/signin';
+        // const url = 
+
+        
+
+        fetch(process.env.REACT_APP_LOGINAPI, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -65,7 +75,7 @@ export default class Login extends Component {
                     </div>
                 </div>
 
-                <button onClick={() => this.handleSumbit()} className="btn btn-primary btn-block">Submit</button>
+                <button onClick={this.handleSumbit} className="btn btn-primary btn-block">Submit</button>
                 {/* <p className="forgot-password text-right">
                     Forgot <a href="#">password?</a>
                 </p> */}

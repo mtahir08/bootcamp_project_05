@@ -15,7 +15,8 @@ class Dashboard extends Component {
         dis : false
     }
     componentDidMount(){
-         fetch("https://jsonplaceholder.typicode.com/users")
+      let url  = process.env.DashBoardApi
+         fetch(url)
          .then((res)=>res.json())
          .then((res2)=>{
              console.log(res2)

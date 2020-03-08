@@ -23,7 +23,7 @@ export default class SignUp extends Component {
 	};
 
 
-	
+
 	SignUpEmail = (obj) => {
 
 		const _SenderEmail = 'mtalha31298@gmail.com';
@@ -52,9 +52,9 @@ export default class SignUp extends Component {
 
 		EmailJsServive.SignUpEmail(obj);
 
-		return
-
-		fetch('https://uitedemo.herokuapp.com/auth/signup', {
+		// fetch('https://uitedemo.herokuapp.com/auth/signup', {
+		let url = process.env.REACT_APP_SIGNUPAPI
+		fetch(url, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
