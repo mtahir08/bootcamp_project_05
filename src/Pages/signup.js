@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import {Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Signup from './login';
+
+import EmailJsServive from '../Services/EmailJS'
 
 export default class SignUp extends Component {
 	constructor(props) {
@@ -19,7 +21,39 @@ export default class SignUp extends Component {
 			[e.target.id]: e.target.value
 		});
 	};
+
+
+	
+	SignUpEmail = (obj) => {
+
+		const _SenderEmail = 'mtalha31298@gmail.com';
+
+		var templateParams = {
+			senderEmail: _SenderEmail,
+			receiverEmail: obj.email,
+			toName: obj.name,
+			password: obj.password
+		};
+
+		EmailJsServive.sendEmailJsServive(
+			'template_qvwIRLwF',
+			templateParams,
+			'user_b1UkLL3dEM69Pcb8vrtT2')
+	}
+
+
 	handleSubmit = (e) => {
+
+		var obj = {
+			email: this.state.email,
+			password: this.state.password,
+			name: (this.state.firstName + " " + this.state.lastName),
+		}
+
+		EmailJsServive.SignUpEmail(obj);
+
+		return
+
 		fetch('https://uitedemo.herokuapp.com/auth/signup', {
 			method: 'POST',
 			headers: {
@@ -31,17 +65,17 @@ export default class SignUp extends Component {
 				password: `${this.state.password}`
 			})
 		})
-			.then((response) =>{
-                if(response.status === 200)
-                this.props.history.push('/')
-                else
-                alert("Status: ",response.status)
-            } )
+			.then((response) => {
+				if (response.status === 200)
+					this.props.history.push('/')
+				else
+					alert("Status: ", response.status)
+			})
 	};
 
 	render() {
 		return (
-			<div style={{width:400}}>
+			<div style={{ width: 400 }}>
 				{/* <form onSubmit={this.handleSubmit}> */}
 				<h3>Sign Up</h3>
 
@@ -99,12 +133,12 @@ export default class SignUp extends Component {
 					Already registered <a href="#">sign in?</a>
 				</p>
 				{/* </form> */}
-                <button>
-                    
-                    <Link to="/" >
-                    Sign In
+				<button>
+
+					<Link to="/" >
+						Sign In
                     </Link>
-                </button>
+				</button>
 			</div>
 		);
 	}
