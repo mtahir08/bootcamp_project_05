@@ -12,7 +12,6 @@ import UserTableDetail from '../components/Dashboard/UserTableDetail';
 
 const Dash = (props) => {
 	const [data, setData] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		console.log(props.user, props.token);
@@ -22,7 +21,6 @@ const Dash = (props) => {
 	const didMount = () => {
 		const tokenObj = localStorage.getItem('token');
 		console.log(tokenObj);
-		setIsLoading(true);
 
 		let url = process.env.REACT_APP_DASHBOARDAPI;
 

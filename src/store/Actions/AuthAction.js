@@ -1,45 +1,55 @@
-import ActionTypes  from './ActionsTypes' ;
-// const base_url = ' https://uitedemo.herokuapp.com/api/users' 
+import ActionTypes from './ActionsTypes';
 
 const AuthAction = {
-    setData: (obj) => {
-        console.log(obj)
-        return (dispatch) => {
-            dispatch({ type: ActionTypes.SETDATA, payload:obj })
-        //     const url = `${base_url}`
-        //    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTY0YTI2ZmEyZDkwYTAwMDRhYmUxNjQiLCJleHAiOjE1ODM2NjczNjgsImlhdCI6MTU4MzY2Mzc2OH0.AES4sswlycZPu-Nca29mzj1Cl9X3kDXDP0H6c4u7JQ4"
+	setData: (obj) => {
+		console.log(obj);
+		return (dispatch) => {
+			const url = process.env.REACT_APP_LOGINAPI;
+			fetch(url, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					email: `${obj.email}`,
+					password: `${obj.password}`
+				})
+			})
+				.then((resposne) => resposne.json())
+				.then((data) => {
+					if (data.data.token) {
+						console.log(data);
+						localStorage.setItem('token', data.data.token);
+						dispatch({ type: ActionTypes.SETDATA, payload: data.data });
+					}
+				})
+				.catch((error) => {
+					console.log({ error });
+					alert('please log in again');
+				});
+		};
+	},
+	add: (obj) => {
+		console.log(obj);
+		return (dispatch) => {
+			let url = process.env.REACT_APP_SIGNUPAPI;
+			fetch(url, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					name: obj.name,
+					email: `${obj.email}`,
+					password: `${obj.password}`
+				})
+			})
+				.then((resposne) => resposne.json())
+				.then((data) => {
+					console.log(data);
+				});
+		};
+	}
+};
 
-
-            // fetch(url, {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         'Authorization':`Bearer ${token}` ,
-            //         'Accept': 'application/json' ,
-            //         'origin' : '' ,
-                    
-                    
-            //     },
-            //     body: JSON.stringify(obj)
-            // })
-            //     .then(async (response) => {
-            //         const res = await response.json()
-            //         if (response.status === 200)
-            //             return res
-            //         throw res
-            //     })
-            //     .then((data) => {
-            //         dispatch({ type: ActionTypes.ADD, payload: data })
-            //         console.log( 'data' , data)
-            //     })
-            //     .catch((error) => {
-            //         console.log({ error })
-            //         // dispatch({ type: ActionTypes.CREATE_TODO_FAILED })
-            //     })
-        }
-
-    },
-    
-}
-
-export default AuthAction 
+export default AuthAction;

@@ -1,100 +1,75 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import AuthAction from '../store/Actions/AuthAction';
 import { Link, Redirect } from 'react-router-dom';
 
-class Login extends Component {
-	constructor(props) {
-		super(props);
-	}
+const Login = (props) => {
+	const [input, setInput] = useState({});
 
-	state = {
-		users: [],
-		email: '',
-		password: ''
+	const generalHandler = (e) =>
+		setInput({
+			...input,
+			[e.target.id]: e.target.value
+		});
+
+	const handleSumbit = () => {
+		console.log(input.email, input.password);
+		props.SETDATA({ email: input.email, password: input.password });
+		// props.history.push('/dashboard');
 	};
+	return (
+		<div style={{ width: 400 }}>
+			<h3>Sign In</h3>
 
-	handleEmailField = (e) => {
-		this.setState({ email: e.target.value });
-	};
-	handlePasswordField = (e) => {
-		this.setState({ password: e.target.value });
-	};
-	handleSumbit = () => {
-		const url = 'https://uitedemo.herokuapp.com/auth/signin';
-		fetch(url, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				email: `${this.state.email}`,
-				password: `${this.state.password}`
-			})
-		})
-			.then((resposne) => resposne.json())
-			.then((data) => {
-				if (data.data.token) {
-					console.log(data);
-					localStorage.setItem('token', data.data.token);
-					this.props.history.push('/dashboard');
-				}
-				console.log(data);
-				console.log(this.props.SETDATA);
-				this.props.SETDATA(data.data);
-			});
-	};
-	render(props) {
-		console.log(props);
-		return (
-			<div style={{ width: 400 }}>
-				<h3>Sign In</h3>
-
-				<div className="form-group">
-					<label>Email address</label>
-					<input
-						type="email"
-						className="form-control"
-						placeholder="Enter email"
-						onChange={this.handleEmailField}
-					/>
-				</div>
-
-				<div className="form-group">
-					<label>Password</label>
-					<input
-						type="password"
-						className="form-control"
-						placeholder="Enter password"
-						onChange={this.handlePasswordField}
-					/>
-				</div>
-
-				<div className="form-group">
-					<div className="custom-control custom-checkbox">
-						<input
-							type="checkbox"
-							className="custom-control-input"
-							id="customCheck1"
-						/>
-						<label className="custom-control-label" htmlFor="customCheck1">
-							Remember me
-						</label>
-					</div>
-				</div>
-
-				<button
-					onClick={this.handleSumbit}
-					className="btn btn-primary btn-block"
-				>
-					Submit
-				</button>
-				<button>
-					<Link to="/signup">Sign Up</Link>
-				</button>
+			<div className="form-group">
+				<label>Email address</label>
+				<input
+					type="email"
+					className="form-control"
+					placeholder="Enter email"
+					id="email"
+					onChange={generalHandler}
+				/>
 			</div>
-		);
-	}
+
+			<div className="form-group">
+				<label>Password</label>
+				<input
+					type="password"
+					className="form-control"
+					placeholder="Enter password"
+					id="password"
+					onChange={generalHandler}
+				/>
+			</div>
+
+			<div className="form-group">
+				<div className="custom-control custom-checkbox">
+					<input
+						type="checkbox"
+						className="custom-control-input"
+						id="customCheck1"
+					/>
+					<label className="custom-control-label" htmlFor="customCheck1">
+						Remember me
+					</label>
+				</div>
+			</div>
+
+			<button onClick={handleSumbit} className="btn btn-primary btn-block">
+				Submit
+			</button>
+			<button>
+				<Link to="/signup">Sign Up</Link>
+			</button>
+		</div>
+	);
+};
+
+function mapStateToProps(state) {
+	return {
+		user: state.user
+	};
 }
 
 function mapDispatchToProps(dispatch) {
@@ -106,4 +81,4 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
