@@ -1,31 +1,20 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Signup from './login';
+import { connect } from 'react-redux';
+import AuthAction from '../store/Actions/AuthAction';
 
-import EmailJsServive from '../Services/EmailJS'
+import EmailJsServive from '../Services/EmailJS';
 
-export default class SignUp extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			firstName: null,
-			lastName: null,
-			email: null,
-			password: null
-		};
-	}
+const SignUp = (props) => {
+	const [input, setInput] = useState({});
 
-	changeHandle = (e) => {
-		// console.log(e.target.value)
-		this.setState({
+	const generalHandler = (e) =>
+		setInput({
+			...input,
 			[e.target.id]: e.target.value
 		});
-	};
 
-
-
-	SignUpEmail = (obj) => {
-
+	const SignUpEmail = (obj) => {
 		const _SenderEmail = 'mtalha31298@gmail.com';
 
 		var templateParams = {
@@ -38,108 +27,94 @@ export default class SignUp extends Component {
 		EmailJsServive.sendEmailJsServive(
 			'template_qvwIRLwF',
 			templateParams,
-			'user_b1UkLL3dEM69Pcb8vrtT2')
-	}
-
-
-	handleSubmit = (e) => {
-
-		var obj = {
-			email: this.state.email,
-			password: this.state.password,
-			name: (this.state.firstName + " " + this.state.lastName),
-		}
-
-		EmailJsServive.SignUpEmail(obj);
-
-		// fetch('https://uitedemo.herokuapp.com/auth/signup', {
-		let url = process.env.REACT_APP_SIGNUPAPI
-		fetch(url, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				name: `${this.state.firstName}` + `${this.state.lastName}`,
-				email: `${this.state.email}`,
-				password: `${this.state.password}`
-			})
-		})
-			.then((response) => {
-				if (response.status === 200)
-					this.props.history.push('/')
-				else
-					alert("Status: ", response.status)
-			})
+			'user_b1UkLL3dEM69Pcb8vrtT2'
+		);
 	};
 
-	render() {
-		return (
-			<div style={{ width: 400 }}>
-				{/* <form onSubmit={this.handleSubmit}> */}
-				<h3>Sign Up</h3>
+	const handleSubmit = () => {
+		var obj = {
+			email: input.email,
+			password: input.password,
+			name: `${input.firstName} ${input.lastName}`
+		};
+		SignUpEmail(obj);
 
-				<div className="form-group">
-					<label>First name</label>
-					<input
-						type="text"
-						className="form-control"
-						placeholder="First name"
-						id="firstName"
-						onChange={this.changeHandle}
-					/>
-				</div>
+		props.ADD({
+			email: input.email,
+			password: input.password,
+			name: `${input.firstName} ${input.lastName}`
+		});
+	};
+	return (
+		<div style={{ width: 400 }}>
+			{/* <form onSubmit={this.handleSubmit}> */}
+			<h3>Sign Up</h3>
 
-				<div className="form-group">
-					<label>Last name</label>
-					<input
-						type="text"
-						className="form-control"
-						placeholder="Last name"
-						id="lastName"
-						onChange={this.changeHandle}
-					/>
-				</div>
-
-				<div className="form-group">
-					<label>Email address</label>
-					<input
-						type="email"
-						className="form-control"
-						placeholder="Enter email"
-						id="email"
-						onChange={this.changeHandle}
-					/>
-				</div>
-
-				<div className="form-group">
-					<label>Password</label>
-					<input
-						type="password"
-						className="form-control"
-						placeholder="Enter password"
-						id="password"
-						onChange={this.changeHandle}
-					/>
-				</div>
-
-				<button
-					className="btn btn-primary btn-block"
-					onClick={this.handleSubmit}
-				>
-					Sign Up
-				</button>
-				<p className="forgot-password text-right">
-					Already registered <a href="#">sign in?</a>
-				</p>
-				{/* </form> */}
-				<button>
-
-					<Link to="/" >
-						Sign In
-                    </Link>
-				</button>
+			<div className="form-group">
+				<label>First name</label>
+				<input
+					type="text"
+					className="form-control"
+					placeholder="First name"
+					id="firstName"
+					onChange={generalHandler}
+				/>
 			</div>
-		);
-	}
+
+			<div className="form-group">
+				<label>Last name</label>
+				<input
+					type="text"
+					className="form-control"
+					placeholder="Last name"
+					id="lastName"
+					onChange={generalHandler}
+				/>
+			</div>
+
+			<div className="form-group">
+				<label>Email address</label>
+				<input
+					type="email"
+					className="form-control"
+					placeholder="Enter email"
+					id="email"
+					onChange={generalHandler}
+				/>
+			</div>
+
+			<div className="form-group">
+				<label>Password</label>
+				<input
+					type="password"
+					className="form-control"
+					placeholder="Enter password"
+					id="password"
+					onChange={generalHandler}
+				/>
+			</div>
+
+			<button className="btn btn-primary btn-block" onClick={handleSubmit}>
+				Sign Up
+			</button>
+			<p className="forgot-password text-right">
+				Already registered <a href="#">sign in?</a>
+			</p>
+			{/* </form> */}
+			<button>
+				<Link to="/">Sign In</Link>
+			</button>
+		</div>
+	);
+};
+
+function mapDispatchToProps(dispatch) {
+	return {
+		ADD: (obj) => {
+			console.log(obj);
+			dispatch(AuthAction.add(obj));
+		}
+	};
 }
+
+export default connect(null, mapDispatchToProps)(SignUp);
