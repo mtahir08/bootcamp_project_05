@@ -62,13 +62,13 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dash);
-
 function mapDispatchToProps(dispatch) {
 	return {
 		Add: (data) => dispatch({ type: 'ADD', payload: data })
 	};
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dash);
 
 function UserDetail() {
 	const { userId } = useParams();

@@ -15,7 +15,7 @@ const Login = (props) => {
 	const handleSumbit = () => {
 		console.log(input.email, input.password);
 		props.SETDATA({ email: input.email, password: input.password });
-		// props.history.push('/dashboard');
+    props.history.push('/dashboard');
 	};
 	return (
 		<div style={{ width: 400 }}>
