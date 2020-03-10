@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 
 import '../styles/login.css';
+
 const Login = (props) => {
 	const [input, setInput] = useState({});
 
@@ -22,7 +23,7 @@ const Login = (props) => {
 	};
 	return (
 		<div
-		 className="main"
+		 className="login-main"
 		 >
 			 <div className="div-icon">
 			 <FontAwesomeIcon className="env-icon" icon={faEnvelope} />

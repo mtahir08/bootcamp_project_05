@@ -1,6 +1,6 @@
-.login-main{
+.signup-main{
     width: 970px;
-    height: 500px;
+    height: 570px;
     border-radius: 10px;
     /* border: 1px solid gray; */
     flex:1;
@@ -95,4 +95,8 @@ body{
     font-size: 25px;
     justify-content: center;
     /* padding: 20x; */
+}
+.form-container{
+    margin: 0px;
+    transform: translateY(-80px);
 }
