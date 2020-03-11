@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import AuthAction from '../store/Actions/AuthAction';
 
 import EmailJsServive from '../Services/EmailJS';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
+import '../styles/signup.css';
 
 const SignUp = (props) => {
 	const [input, setInput] = useState({});
@@ -46,64 +49,62 @@ const SignUp = (props) => {
 		});
 	};
 	return (
-		<div style={{ width: 400 }}>
-			{/* <form onSubmit={this.handleSubmit}> */}
-			<h3>Sign Up</h3>
-
+		<div 
+		className="signup-main"
+		>
+			<div className="div-icon">
+			 <FontAwesomeIcon className="env-icon" icon={faEnvelope} />
+			 </div>
+			 <div className="login-heading" >Sign Up</div>
+			 <div className="form-container">
 			<div className="form-group">
-				<label>First name</label>
+				<label className="labels" >First name</label>
 				<input
 					type="text"
 					className="form-control"
-					placeholder="First name"
 					id="firstName"
 					onChange={generalHandler}
 				/>
 			</div>
 
 			<div className="form-group">
-				<label>Last name</label>
+				<label className="labels" >Last name</label>
 				<input
 					type="text"
 					className="form-control"
-					placeholder="Last name"
 					id="lastName"
 					onChange={generalHandler}
 				/>
 			</div>
 
 			<div className="form-group">
-				<label>Email address</label>
+				<label className="labels email-label" >Email address</label>
 				<input
 					type="email"
 					className="form-control"
-					placeholder="Enter email"
 					id="email"
 					onChange={generalHandler}
 				/>
 			</div>
 
 			<div className="form-group">
-				<label>Password</label>
+				<label className="labels" >Password</label>
 				<input
 					type="password"
-					className="form-control"
-					placeholder="Enter password"
+					className="form-control password-field"
 					id="password"
 					onChange={generalHandler}
 				/>
 			</div>
 
-			<button className="btn btn-primary btn-block" onClick={handleSubmit}>
-				Sign Up
+			<button onClick={handleSubmit} className="btn btn-block signup-btn">
+				SUBMIT
 			</button>
-			<p className="forgot-password text-right">
-				Already registered <a href="#">sign in?</a>
-			</p>
-			{/* </form> */}
-			<button>
-				<Link to="/">Sign In</Link>
-			</button>
+			<div className="btn-login">
+				Already have an account ?
+				<Link to="/"> Login</Link>
+			</div>
+			</div>
 		</div>
 	);
 };

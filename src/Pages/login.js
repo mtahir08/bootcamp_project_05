@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import AuthAction from '../store/Actions/AuthAction';
 import { Link, Redirect } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
+
+import '../styles/login.css';
 
 const Login = (props) => {
 	const [input, setInput] = useState({});
@@ -18,26 +22,31 @@ const Login = (props) => {
     props.history.push('/dashboard');
 	};
 	return (
-		<div style={{ width: 400 }}>
-			<h3>Sign In</h3>
-
+		<div
+		 className="login-main"
+		 >
+			 <div className="div-icon">
+			 <FontAwesomeIcon className="env-icon" icon={faEnvelope} />
+			 </div>
+			 <div className="login-heading" >Login</div>
+			 <div className="login-form-container">
 			<div className="form-group">
-				<label>Email address</label>
+				<label className="labels email-label" >Email Address</label>
 				<input
 					type="email"
 					className="form-control"
-					placeholder="Enter email"
+					// placeholder="Enter email"
 					id="email"
 					onChange={generalHandler}
 				/>
 			</div>
 
 			<div className="form-group">
-				<label>Password</label>
+				<label className="labels password-label" >Password</label>
 				<input
 					type="password"
 					className="form-control"
-					placeholder="Enter password"
+					// placeholder="Enter password"
 					id="password"
 					onChange={generalHandler}
 				/>
@@ -50,18 +59,20 @@ const Login = (props) => {
 						className="custom-control-input"
 						id="customCheck1"
 					/>
-					<label className="custom-control-label" htmlFor="customCheck1">
+					{/* <label className="custom-control-label remember-label " htmlFor="customCheck2">
 						Remember me
-					</label>
+					</label> */}
 				</div>
 			</div>
 
-			<button onClick={handleSumbit} className="btn btn-primary btn-block">
-				Submit
+			<button onClick={handleSumbit} className="btn btn-block login-btn">
+				SUBMIT
 			</button>
-			<button>
-				<Link to="/signup">Sign Up</Link>
-			</button>
+			<div className="btn-signup">
+				Haven't account ?
+				<Link to="/signup"> Sign Up</Link>
+			</div>
+			</div>
 		</div>
 	);
 };
