@@ -19,7 +19,7 @@ export default class Receipt extends Component {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTY0YTEwZmEyZDkwYTAwMDRhYmUxNWMiLCJleHAiOjE1ODM2NzY5NzQsImlhdCI6MTU4MzY3MzM3NH0.ANlAFMpIAczZVYgm_a3rgagMGFol42TurUy2mTnbJAE"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTY0YTg0YWEyZDkwYTAwMDRhYmUxNjgiLCJleHAiOjE1ODM5NTc2NjEsImlhdCI6MTU4Mzk1NDA2MX0.tBQThFC98eIv2NJaYWFdS-TwpjaKbLbq8Mx9k7XYAtU"
       }
     })
       .then((data) => data.json())
@@ -46,7 +46,17 @@ export default class Receipt extends Component {
         <td>{user.month}</td>
         <td>{user.status}</td>
         <td>{user.approvedAt}</td>
-        <Link to={`/receipt/123/${user._id}`}>View Details</Link>
+        <Link 
+        // to={`/receipt/123/${user._id}`}
+        to={{
+          pathname: `/receipt/123/${user._id}`,
+          state: {
+           user
+          }}
+        }
+        >
+
+          View Details</Link>
       </tr>
     ));
 

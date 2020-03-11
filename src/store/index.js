@@ -1,15 +1,8 @@
-import { combineReducers } from 'redux';
-
-// export default store;
-
-import { applyMiddleware, createStore } from 'redux';
-import thunk from 'redux-thunk';
+import { createStore } from 'redux';
 
 import { TodoReducer } from './Reducers';
-import { authReducer } from './Reducers/authReducer';
 
-const middleware = applyMiddleware(thunk);
-const rootReducer = combineReducers({ TodoReducer, authReducer });
-let store = createStore(rootReducer, middleware);
+let store = createStore(TodoReducer);
+
 
 export default store;
