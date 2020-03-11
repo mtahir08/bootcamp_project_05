@@ -91,16 +91,16 @@ const SignUp = (props) => {
 				<label className="labels" >Password</label>
 				<input
 					type="password"
-					className="form-control"
+					className="form-control password-field"
 					id="password"
 					onChange={generalHandler}
 				/>
 			</div>
 
-			<button onClick={handleSubmit} className="btn btn-primary btn-block login-btn">
+			<button onClick={handleSubmit} className="btn btn-block signup-btn">
 				SUBMIT
 			</button>
-			<div className="btn-signup">
+			<div className="btn-login">
 				Already have an account ?
 				<Link to="/"> Login</Link>
 			</div>

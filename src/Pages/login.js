@@ -29,6 +29,7 @@ const Login = (props) => {
 			 <FontAwesomeIcon className="env-icon" icon={faEnvelope} />
 			 </div>
 			 <div className="login-heading" >Login</div>
+			 <div className="login-form-container">
 			<div className="form-group">
 				<label className="labels email-label" >Email Address</label>
 				<input
@@ -64,12 +65,13 @@ const Login = (props) => {
 				</div>
 			</div>
 
-			<button onClick={handleSumbit} className="btn btn-primary btn-block login-btn">
+			<button onClick={handleSumbit} className="btn btn-block login-btn">
 				SUBMIT
 			</button>
 			<div className="btn-signup">
 				Haven't account ?
 				<Link to="/signup"> Sign Up</Link>
+			</div>
 			</div>
 		</div>
 	);
