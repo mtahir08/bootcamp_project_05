@@ -1,0 +1,14 @@
+/* main {
+    background: #000;
+} */
+
+.divs {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1006;
+    min-width: 60px;
+    background: #000000;
+    transition: min-width 0.72s;
+}

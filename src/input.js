@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux'
 import './index.css'
-import { styles } from './style'
-import { Link } from 'react-router-dom';
+import { Link , useHistory} from 'react-router-dom';
 import TodoActions from './store/Actions/index';
 
 function mapStateToProps(state) {
+    
     return {
         editingItem: state.editingItem
     }
@@ -40,11 +40,10 @@ const Input = (props) => {
 
     } 
 
+    let history = useHistory();
+
     return    <div className=""> 
     
-    <Link to="/">
-				<button className="btn btn-danger ">Back </button>
-			</Link>
 
     <div id="input" className="container">
         <label>Name: </label>
@@ -91,6 +90,8 @@ const Input = (props) => {
             if (name.length ) {
            
                     props.Add({ name , email , password })
+                    // let to = '/'+ 'dashboard' ;
+                    history.push('/dashboard');
                 
             }
             // document.getElementById('input').classList.add("hide")

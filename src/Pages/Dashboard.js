@@ -5,6 +5,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import '../index.css';
 import UserTable from '../components/Dashboard/UserTable';
 import UserTableDetail from '../components/Dashboard/UserTableDetail';
+import Side from '../Sidenav';
 
 class Dash extends Component {
 	state = {
@@ -39,6 +40,7 @@ class Dash extends Component {
 	render() {
 		return (
 			<div>
+
 				<div className="container">
 					<Table striped bordered hover>
 						<UserTable />
@@ -63,7 +65,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 function UserDetail() {
+	console.log('params' , useParams());
 	const { userId } = useParams()
+	
 	const history = useHistory()
 	const [userDetail, setUserDetail] = useState([])
 	const [isLoading, setIsLoading] = useState(false)
