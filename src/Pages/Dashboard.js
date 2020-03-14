@@ -9,37 +9,38 @@ import { Table } from 'react-bootstrap';
 import { useParams, useHistory } from 'react-router-dom';
 import UserTable from '../components/Dashboard/UserTable';
 import UserTableDetail from '../components/Dashboard/UserTableDetail';
+
 import Side from '../Sidenav';
 
 const Dash = (props) => {
 	const [data, setData] = useState([]);
-
 	useEffect(() => {
-		console.log(props.user, props.token);
+		
 		didMount();
 	}, [props.users]);
 
 	const didMount = () => {
 		const tokenObj = localStorage.getItem('token');
-		console.log(tokenObj);
-
+	
 		let url = process.env.REACT_APP_DASHBOARDAPI;
 
 		fetch(url, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: `Bearer ${tokenObj}`
+				"Authorization": `Bearer ${tokenObj}`  
 			}
 		})
 			.then((data) => {
-				data.json().then((res2) => {
-					console.log('res2', res2);
-					setData(res2.data.user);
-				});
+				data.json()
+					.then(res2 => {
+					
+						setData({ data: res2.data.user })
+
+					})
 			})
 			.catch((error) => {
-				console.log({ error });
+				
 			});
 	};
 
@@ -48,7 +49,7 @@ const Dash = (props) => {
 			<div className="container">
 				<Table striped bordered hover>
 					<UserTable />
-					<UserTableDetail userData={data} />
+					<UserTableDetail userData={data.data} />
 				</Table>
 			</div>
 		</div>
@@ -56,7 +57,7 @@ const Dash = (props) => {
 };
 
 function mapStateToProps(state) {
-	console.log(state);
+	
 	return {
 		user: state.users,
 		token: state.token
@@ -81,7 +82,7 @@ function UserDetail() {
 	useEffect(() => {
 		setIsLoading(true);
 		let url = process.env.REACT_APP_DASHBOARDAPI;
-		console.log(url + userId);
+		
 		fetch(url + userId)
 			.then((response) => response.json())
 			.then((response) => {

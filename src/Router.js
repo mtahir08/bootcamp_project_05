@@ -1,5 +1,6 @@
 import React,{useContext} from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
+import StudentDashboard from './Pages/studentDashboard';
 import Login from './Pages/login';
 import Signup from './Pages/signup';
 // import Input from './input';
@@ -26,6 +27,7 @@ const Routes = () => {
         }}> 
 				<Route exact path="/" component={Login} />
 				<Route exact path="/signup" component={Signup} />
+				<Route exact path="/studentDashboard" component={StudentDashboard} />
 				<Route exact path="/dashboard" component={Side} />
 			</div>
 		</BrowserRouter>
