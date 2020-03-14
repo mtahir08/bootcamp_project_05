@@ -38,7 +38,6 @@ const Dash = (props) => {
 						setData({ data: res2.data.user })
 
 					})
-
 			})
 			.catch((error) => {
 				
