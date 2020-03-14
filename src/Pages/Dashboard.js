@@ -1,118 +1,111 @@
-import React, { Component, useState, useEffect } from 'react';
+// Token and user data is comming from store of react-redux which is created from login information.
+// And now token can get from mapsStateToProps fucntion or in dash function
+// But I am still getting token from local storage beacuse of function running cycle or async behaviour
+
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Table } from 'react-bootstrap'
-import { useParams, useHistory } from 'react-router-dom';
 import '../index.css';
+import { Table } from 'react-bootstrap';
+import { useParams, useHistory } from 'react-router-dom';
 import UserTable from '../components/Dashboard/UserTable';
 import UserTableDetail from '../components/Dashboard/UserTableDetail';
 
 import Side from '../Sidenav';
 
-class Dash extends Component {
-	state = {
-		data: [],
-		isLoading: false
-	}
-	componentDidMount() {
+const Dash = (props) => {
+	const [data, setData] = useState([]);
+
+	useEffect(() => {
+		
+		didMount();
+	}, [props.users]);
+
+	const didMount = () => {
 		const tokenObj = localStorage.getItem('token');
-		this.setState({ isLoading: true })
-		let url = process.env.REACT_APP_DASHBOARDAPI
+	
+		
+		let url = 'https://uitedemo.herokuapp.com/api/users';
+
 		fetch(url, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
-				"Authorization": 'Bearer ' + tokenObj 
+				"Authorization": `Bearer ${tokenObj}`  
 			}
 		})
 			.then((data) => {
 				data.json()
 					.then(res2 => {
-						
-						this.setState({ data: res2.data.user })
+					
+						setData({ data: res2.data.user })
 
 					})
 
 			})
 			.catch((error) => {
-				console.log({ error })
-			})
-	}
+				
+			});
+	};
 
-	render() {
-		return (
-			<div>
-
-				<div className="container">
-					<Table striped bordered hover>
-						<UserTable />
-						<UserTableDetail userData={this.state.data} />
-					</Table>
-				</div>
-
-
+	return (
+		<div>
+			<div className="container">
+				<Table striped bordered hover>
+					<UserTable />
+					<UserTableDetail userData={data} />
+				</Table>
 			</div>
-		);
+		</div>
+	);
+};
+
+function mapStateToProps(state) {
+	
+	return {
+		user: state.users,
+		token: state.token
 	};
 }
-
-
-export default connect(null, mapDispatchToProps)(Dash);
-
 
 function mapDispatchToProps(dispatch) {
 	return {
-		Add: (data) => dispatch({ type: 'ADD', payload: data }),
+		Add: (data) => dispatch({ type: 'ADD', payload: data })
 	};
 }
 
+export default connect(mapStateToProps, mapDispatchToProps)(Dash);
+
 function UserDetail() {
-	console.log('params' , useParams());
 	const { userId } = useParams()
-	
+
 	const history = useHistory()
 	const [userDetail, setUserDetail] = useState([])
 	const [isLoading, setIsLoading] = useState(false)
 
 	useEffect(() => {
-		setIsLoading(true)
-		let url = process.env.REACT_APP_DASHBOARDAPI
-		const tokenObj = localStorage.getItem('token');
-		fetch(url + userId, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				"Authorization": 'Bearer ' + tokenObj //"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTY0YzRhOGY3MmNhYzAwMDRkODZiMjgiLCJleHAiOjE1ODM2NzAyMzQsImlhdCI6MTU4MzY2NjYzNH0.LudbvSRTcMoYiUlq65K4f0o6RRKEhhhZeUYVpFbREq4"
-			}
-		})
-			.then(response => {
-				if (!response.ok)
-					throw response
-				return response.json()
-			})
-			.then(response => {
-				setUserDetail([response.data.user])
-				setIsLoading(false)
-			})
-			.catch((error) => {
-				if (error.status === 401) {
-					history.push('/')
-				}
-				console.log({ error });
-			})
-	}, [])
+		setIsLoading(true);
+		let url = process.env.REACT_APP_DASHBOARDAPI;
+		
+		fetch(url + userId)
+			.then((response) => response.json())
+			.then((response) => {
+				setUserDetail([response]);
+				setIsLoading(false);
+			});
+	}, []);
 
 	return (
 		<div className="container">
 			<Table striped bordered hover>
-
 				<UserTable />
 
-				{isLoading ? (<h1>Loading...</h1>)
-					: (<UserTableDetail userData={userDetail} />)}
-
-
+				{isLoading ? (
+					<h1>Loading...</h1>
+				) : (
+						<UserTableDetail userData={userDetail} />
+					)}
 			</Table>
 		</div>
-	)
+	);
 }
-export { UserDetail }
+export { UserDetail };
