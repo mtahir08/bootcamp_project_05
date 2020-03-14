@@ -1,0 +1,17 @@
+*{
+    margin : 0%;
+}
+
+.header {
+    margin-left: 270px;
+background: rgb(165, 159, 159);
+height: 60px;
+    width: 900px;
+    border-radius: 10px;
+    /* align-self: center; */
+    /* margin: 10px; */
+padding: 19px 5px;
+    
+    
+    
+}

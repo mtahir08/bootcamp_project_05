@@ -18,6 +18,9 @@ export default class Login extends Component {
     }
     handleSumbit = () => {
 
+        localStorage.setItem("user", this.state.email )
+        
+
         fetch(process.env.REACT_APP_LOGINAPI, {
             method: 'POST',
             headers: {
@@ -31,11 +34,12 @@ export default class Login extends Component {
             .then(resposne => resposne.json())
             .then(data => {
                 if (data.data.token) {
-                    console.log(data)
+                   
                     localStorage.setItem("token", data.data.token)
-                    this.props.history.push('/dashboard');
+                   
+                    this.props.history.push('/dashboard' );
                 }
-                console.log(data)
+             
 
             })
     }

@@ -14,27 +14,26 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         Add: (obj) => dispatch(TodoActions.Add(obj)),
-        // Update: (obj) => dispatch(TodoActions.Update(obj))
+       
     }
 }
 
 const Input = (props) => {
-    // console.log(props);
+ 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    // const [Office, setOffice] = useState("")
-    // const [Time, settime] = useState(new Date())
+    
 
     useEffect(() => {
-        console.log(props.editingItem);
+      
         if (props.editingItem) {
             setName(props.editingItem.text)
         }
     }, [props.editingItem])
 
     const show_input = ( ) => {
-        console.log('show' ,document.getElementById('add'))
+       
        
         
 
@@ -44,7 +43,7 @@ const Input = (props) => {
 
     return    <div className=""> 
     
-    
+
 
     <div id="input" className="container">
         <label>Name: </label>
@@ -77,26 +76,17 @@ const Input = (props) => {
            
         />
         <br></br>
-        {/* <label>Office: </label>
-        <input
-            type="text"
-            onChange={(event) => { setOffice(event.target.value) }}
-            value={Office}
-            className="input"
-        
-        />
-        <br></br> */}
+  
 
         <button className="btn btn-danger boton" onClick={() => {
             if (name.length ) {
            
                     props.Add({ name , email , password })
-                    // let to = '/'+ 'dashboard' ;
+                    
                     history.push('/dashboard');
                 
             }
-            // document.getElementById('input').classList.add("hide")
-            // document.getElementById('add').classList = "hide btn btn-danger" 
+        
         }}> Add  </button>
 
         
