@@ -20,7 +20,7 @@ const AuthAction = {
 				})
 		}
 	},
-	setData: (obj) => {
+	login: (obj) => {
 		return (dispatch) => {
 			const url = process.env.REACT_APP_LOGINAPI;
 			fetch(url, {
@@ -28,15 +28,17 @@ const AuthAction = {
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify({
-					email: `${obj.email}`,
-					password: `${obj.password}`
-				})
+				body: JSON.stringify(obj)
 			})
-				.then((resposne) => resposne.json())
+				.then((response) => {
+					if (response.status === 200) {
+						return response.json()
+					}
+					throw response
+				})
 				.then((data) => {
 					if (data.data.token) {
-						dispatch({ type: ActionTypes.SETDATA, payload: data.data });
+						dispatch({ type: ActionTypes.LOGIN, payload: data.data });
 						return (data.data);
 					}
 				})

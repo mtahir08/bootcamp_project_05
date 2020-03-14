@@ -2,7 +2,7 @@ const ActionTypes = {
     ADD: "ADD",
     EDIT: "EDIT",
     SETADMINDATA: "SETADMINDATA",
-    SETDATA: "SETDATA",
+    LOGIN: "LOGIN",
     SETSTUDENT: 'SETSTUDENT'
 }
 
