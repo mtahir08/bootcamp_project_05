@@ -7,8 +7,8 @@ const TodoActions = {
         return (dispatch) => {
             dispatch({ type: ActionTypes.ADD })
             const url = `${base_url}`
-            const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTY0YTI2ZmEyZDkwYTAwMDRhYmUxNjQiLCJleHAiOjE1ODM2NjczNjgsImlhdCI6MTU4MzY2Mzc2OH0.AES4sswlycZPu-Nca29mzj1Cl9X3kDXDP0H6c4u7JQ4"
-
+            // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTY0YTI2ZmEyZDkwYTAwMDRhYmUxNjQiLCJleHAiOjE1ODM2NjczNjgsImlhdCI6MTU4MzY2Mzc2OH0.AES4sswlycZPu-Nca29mzj1Cl9X3kDXDP0H6c4u7JQ4"
+            const token = localStorage.getItem('token');
 
             fetch(url, {
                 method: 'POST',
