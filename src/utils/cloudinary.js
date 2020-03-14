@@ -6,20 +6,18 @@ const getCloudinaryUrl = async (imageFile) => {
     data.append('file', imageFile);
     data.append('upload_preset', "gq1yajbf")
     data.append('cloud_name', 'dutexiflb');
-
     try {
         const res = await fetch("https://api.cloudinary.com/v1_1/dutexiflb/image/upload", {
             method: "post",
             body: data
         })
 
-        const data = await res.json();
-        return data.url;
+        const dataFile = await res.json();
+        return dataFile.url;
     } catch (err) {
         console.log(err)
     }
 }
-
 
 
 export { getCloudinaryUrl }
