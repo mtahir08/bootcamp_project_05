@@ -3,7 +3,7 @@ const INITIAL_STATE = {
     Data: [],
 }
 
-function TodoReducer(state = INITIAL_STATE, action) {
+function receiptReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
 
         case 'ADD': {
@@ -12,15 +12,9 @@ function TodoReducer(state = INITIAL_STATE, action) {
                 Data: [...state.Data, action.payload]
             }
         }
-    
-        case 'SETDATA': {
-            return {
-                ...state,
-                todos: action.payload
-            }
-        }
+       
         default: return state;
     }
 }
 
-export { TodoReducer };
+export { receiptReducer };

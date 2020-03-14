@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import '../index.css';
-import { Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap'
 import { useParams, useHistory } from 'react-router-dom';
+// import '../index.css';
 import UserTable from '../components/Dashboard/UserTable';
 import UserTableDetail from '../components/Dashboard/UserTableDetail';
 import DashboardAction from '../store/Actions/DashboardAction';
@@ -65,7 +65,7 @@ const Dash = (props) => {
 	});
 
 	useEffect(() => {
-		console.log(props.user, props.token);
+
 		didMount();
 	}, []);
 
@@ -227,9 +227,9 @@ const Dash = (props) => {
 			</div>
 		);
 	};
-
 	return (
 		<div>
+
 			<div className="container">
 				<div>{graph()}</div>
 				<Table striped bordered hover>
@@ -239,7 +239,7 @@ const Dash = (props) => {
 			</div>
 		</div>
 	);
-};
+}
 
 function mapStateToProps(state) {
 	console.log(state.dashboardReducer.user);
@@ -278,7 +278,7 @@ function UserDetail() {
 	useEffect(() => {
 		setIsLoading(true);
 		let url = process.env.REACT_APP_DASHBOARDAPI;
-		console.log(url + userId);
+
 		fetch(url + userId)
 			.then((response) => response.json())
 			.then((response) => {
@@ -295,10 +295,11 @@ function UserDetail() {
 				{isLoading ? (
 					<h1>Loading...</h1>
 				) : (
-					<UserTableDetail userData={userDetail} />
-				)}
+						<UserTableDetail userData={userDetail} />
+					)}
 			</Table>
 		</div>
+
 	);
 }
-export { UserDetail };
+export { UserDetail }

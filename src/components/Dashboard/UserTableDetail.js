@@ -1,14 +1,23 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import EditIcon from '@material-ui/icons/Edit';
 
 function UserDetail(props) {
+  const history = useHistory()
+
+  function editUser(id) {
+    console.log(id)
+
+    history.push('/input', id)
+  }
+
   const userData = props.userData.length ? props.userData.map(user => {
     return (
-      <tr key={user.id}>
+      <tr key={user._id}>
         <td>{user._id}</td>
         <td>{user.email}</td>
         <td>{user.gender}</td>
-        <td>{user.createdAt.split('-')[0]}</td>
+        <td>{user.createdAt}</td>
         <td>
           <Link
             to={{
@@ -18,10 +27,11 @@ function UserDetail(props) {
               }
             }}
           >View</Link>
+          <EditIcon onClick={() => { editUser(user) }} />
         </td>
-      </tr>
+      </tr >
     )
-  }) : null
+  }) : ''
   return (
     <tbody>
       {userData}
