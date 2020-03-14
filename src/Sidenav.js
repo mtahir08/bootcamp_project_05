@@ -3,7 +3,7 @@ import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/rea
 // import Input from './input'
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import Dash, { UserDetail } from './Pages/Dashboard';
-import { ReceiptDetails } from './Pages/Receipt.Detail';
+import  ReceiptDetails  from './Pages/ReceiptDetail';
 import ReceiptAdd from './Pages/receiptAdd';
 import Input from './input';
 import { CloudinaryImagePage } from './Pages/CloudinaryImagePage';
