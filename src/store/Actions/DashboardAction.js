@@ -13,12 +13,15 @@ const DashboardAction = {
 				}
 			})
 				.then((data) => {
-					data.json().then((res) => {
-						console.log('receipt', res.data.receipt);
-						dispatch({
-							type: ActionTypes.GETRECEIPT,
-							payload: res.data.receipt
-						});
+					if (data.status === 200) {
+						return data.json();
+					}
+					throw data
+				})
+				.then((res) => {
+					dispatch({
+						type: ActionTypes.GETRECEIPT,
+						payload: res.data.receipt
 					});
 				})
 				.catch((error) => {
@@ -38,10 +41,14 @@ const DashboardAction = {
 				}
 			})
 				.then((data) => {
-					data.json().then((res) => {
-						console.log('receipt', res.data.user);
-						dispatch({ type: ActionTypes.GETUSER, payload: res.data.user });
-					});
+					if (data.status === 200) {
+						return data.json();
+					}
+					throw data
+				})
+				.then((res) => {
+					console.log('receipt', res.data.user);
+					dispatch({ type: ActionTypes.GETUSER, payload: res.data.user });
 				})
 				.catch((error) => {
 					console.log({ error });
