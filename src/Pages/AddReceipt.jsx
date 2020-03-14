@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Button } from 'react-bootstrap';
-import DatePicker from 'react-date-picker';
 import { getCloudinaryUrl } from '../utils/cloudinary';
+import { addReceipt } from '../store/Actions/AddReceiptAction';
 
 
 class AddReceipt extends Component {
@@ -14,6 +15,21 @@ class AddReceipt extends Component {
         imageUrl: '',
         message: '',
         amount: '',
+        isLoding: false,
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { addReceiptState } = nextProps
+
+        if (addReceiptState.lodding) {
+            this.setState({ isLoding: true })
+        }
+        if (addReceiptState.status) {
+            alert("Successfully add Receipt")
+        }
+        if (addReceiptState.error) {
+            alert("Something was Wrong")
+        }
     }
 
     onChangeFile = (event) => {
@@ -27,10 +43,11 @@ class AddReceipt extends Component {
         this.setState({ amount: event.target.value })
     }
 
-    handleChange = (date) => {
+    handleChange = (e) => {
+        const date = new Date(e.target.value)
         this.setState({
             dateNow: date,
-            currentDate: date && date.getDate(),
+            currentDate: date && date.getDate(date),
             Month: date && date.getMonth(),
             Year: date && date.getFullYear()
         });
@@ -38,7 +55,6 @@ class AddReceipt extends Component {
 
     submitButton = async () => {
         const { imageFile, dateNow, amount, Month, Year, } = this.state;
-        const token = localStorage.getItem("token");
 
         if (!imageFile) {
             return alert("Please select any file")
@@ -65,30 +81,7 @@ class AddReceipt extends Component {
                 "picture": `${url}`,
                 "amount": `${amount}`,
             }
-
-            fetch("https://uitedemo.herokuapp.com/api/receipt", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify(obj)
-            })
-                .then(response => response.json())
-                .then(result => {
-                    if (result.message === "Authorization failed!") {
-                        alert("Authorization failed!")
-                    }
-                    else if (result.message === "Successfully Created") {
-
-                        alert("Successfully Added!")
-                        this.props.history.push("/receipt")
-                    }
-                    else {
-                        alert(result.message)
-                    }
-                })
-                .catch(error => console.log('error', error))
+            this.props.addReceipt(obj)
         }
     }
 
@@ -98,15 +91,12 @@ class AddReceipt extends Component {
 
     render() {
         return (
-            <div style={{ height: '100%' }}>
-                <h1>Add Receipt</h1>
+            <div>
+                <h1 style={{ color: 'black' }}>Add Receipt</h1>
                 <div className="container" style={{ marginTop: '10%', }}>
                     <div style={{ width: "30%", marginBottom: 10 }}>
                         <h4>Select Date</h4>
-                        <DatePicker
-                            selected={this.state.currentDate}
-                            onChange={this.handleChange}
-                        />
+                        <input type="date" onChange={this.handleChange} />
                     </div>
 
                     <div style={{ width: "30%", marginBottom: 10 }}>
@@ -114,11 +104,11 @@ class AddReceipt extends Component {
                         <input type='number' onChange={this.onChange} width='20px' height='20px' />
                     </div>
 
-                    <div style={{ width: "30%", marginBottom: 10 }}>
+                    <div style={{ width: "30%", marginBottom: 10, marginLeft: 20 }}>
                         <input type='file' onChange={this.onChangeFile} width='20px' height='20px' />
                     </div>
 
-                    <div style={{ marginBottom: 10, display: 'flex', }}>
+                    <div style={{ marginBottom: 10, display: 'flex', marginLeft: 20 }}>
                         <Button onClick={this.submitButton} style={{ marginRight: '4%', width: 100, height: 40 }}>Upload</Button>
                         <Button onClick={this.gotoBack} style={{ width: 100, height: 40 }}>Go Back</Button>
                     </div>
@@ -129,4 +119,20 @@ class AddReceipt extends Component {
     }
 }
 
-export default AddReceipt
+const mapStateToProps = (state) => {
+    return {
+        addReceiptState: state.AddReceiptReducer,
+
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addReceipt: (obj) => dispatch(addReceipt(obj))
+    }
+}
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(AddReceipt)
+

@@ -17,8 +17,9 @@ const AuthAction = {
 				.then((resposne) => resposne.json())
 				.then((data) => {
 					if (data.data.token) {
+						localStorage.setItem("token", data.data.token)
 						dispatch({ type: ActionTypes.SETDATA, payload: data.data });
-						return(data.data);
+						return (data.data);
 					}
 				})
 				.catch((error) => {
@@ -41,7 +42,7 @@ const AuthAction = {
 				})
 			})
 				.then((resposne) => resposne.json())
-				.then((data) => {});
+				.then((data) => { });
 		};
 	},
 };
