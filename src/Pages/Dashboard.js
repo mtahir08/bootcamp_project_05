@@ -135,29 +135,29 @@ const Dash = (props) => {
 		if (props.receipts[1]) {
 			props.receipts.map((receipt, index) => {
 				console.log(receipt.month);
-				if (receipt.month == 'January') {
+				if (receipt.month == 'January' || receipt.month == 'January') {
 					receiptMonths.jan++;
-				} else if (receipt.month === 'Feb') {
+				} else if (receipt.month === 'Feb' || receipt.month == 'February') {
 					receiptMonths.feb++;
-				} else if (receipt.month === 'march') {
+				} else if (receipt.month === 'march' || receipt.month === 'March') {
 					receiptMonths.march++;
-				} else if (receipt.month === 'April') {
+				} else if (receipt.month === 'April' || receipt.month === 'april') {
 					receiptMonths.april++;
-				} else if (receipt.month === 'May') {
+				} else if (receipt.month === 'May' || receipt.month === 'may') {
 					receiptMonths.may++;
-				} else if (receipt.month === 'june') {
+				} else if (receipt.month === 'june' || receipt.month === 'June') {
 					receiptMonths.june++;
-				} else if (receipt.month === 'July') {
+				} else if (receipt.month === 'July' || receipt.month === 'July') {
 					receiptMonths.july++;
-				} else if (receipt.month === 'August') {
+				} else if (receipt.month === 'August' || receipt.month === 'august') {
 					receiptMonths.aug++;
-				} else if (receipt.month === 'Sep') {
+				} else if (receipt.month === 'Sep' || receipt.month === 'Semptember') {
 					receiptMonths.sep++;
-				} else if (receipt.month === 'oct') {
+				} else if (receipt.month === 'oct' || receipt.month === 'October') {
 					receiptMonths.oct++;
-				} else if (receipt.month === 'nov') {
+				} else if (receipt.month === 'nov' || receipt.month === 'November') {
 					receiptMonths.nov++;
-				} else if (receipt.month === 'dec') {
+				} else if (receipt.month === 'dec' || receipt.month === 'December') {
 					receiptMonths.dec++;
 				}
 			});
