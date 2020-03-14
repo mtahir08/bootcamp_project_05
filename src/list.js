@@ -12,13 +12,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		// delete: (id) => {
-		//     return dispatch(TodoActions.Delete(id))
-		// },
+		
 		delete: (id) => {
 			return dispatch({ type: 'DELETE', payload: id });
 		},
-		// edit: (obj) => dispatch(TodoActions.Edit(obj))
+		
 		edit: (obj) => dispatch({ type: 'EDIT', payload: obj })
 	};
 }
@@ -54,7 +52,7 @@ const List = (props) => {
 					<tr>
 						<th>S.no</th>
 						<th>Name</th>
-						{/* <th>Class</th> */}
+						
 						<th></th>
 					</tr>
 				</thead>
