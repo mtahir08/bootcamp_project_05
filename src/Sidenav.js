@@ -7,7 +7,7 @@ import { ReceiptDetails } from './Pages/Receipt.Detail';
 import ReceiptAdd from './Pages/receiptAdd';
 import Input from './input';
 import { CloudinaryImagePage } from './Pages/CloudinaryImagePage';
-
+import ThemeToggler from "../src/ThemeToggler";
 import './sidenav.css'
 import { Route,
 
@@ -101,7 +101,7 @@ return(
                         </NavText>
                     </NavItem>
 
-
+                    <ThemeToggler />
                     {/* <NavItem eventKey="signup">
                         <NavIcon>
                             <i className="fa fa-fw fa-device" style={{ fontSize: '1.75em' }} />

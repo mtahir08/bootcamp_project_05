@@ -22,9 +22,8 @@ const Login = (props) => {
     props.history.push('/dashboard');
 	};
 	return (
-		<div
-		 className="login-main"
-		 >
+		<div className="login-main" >
+			
 			 <div className="div-icon">
 			 <FontAwesomeIcon className="env-icon" icon={faEnvelope} />
 			 </div>
