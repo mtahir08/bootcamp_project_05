@@ -13,6 +13,13 @@ function authReducer(state = INITIAL_STATE, action) {
 				token: action.payload.token
 			};
 		}
+		case 'EDIT':{
+			return{
+				...state,
+				user: action.payload,
+				token: action.payload.token
+			}
+		}
 		default:
 			return state;
 	}

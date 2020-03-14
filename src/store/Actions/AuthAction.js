@@ -49,7 +49,30 @@ const AuthAction = {
 					console.log(data);
 				});
 		};
+	},
+	edit: (obj) => {
+		console.log(obj);
+		return (dispatch) => {
+			let url = process.env.REACT_APP_DASHBOARDAPI;
+			fetch(url, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + localStorage.getItem('token')
+				},
+				body: JSON.stringify({
+					name: obj.name,
+					email: `${obj.email}`,
+					password: `${obj.password}`
+				})
+			})
+				.then((resposne) => resposne.json())
+				.then((data) => {
+					console.log(data);
+				});
+		};
 	}
+	
 };
 
 export default AuthAction;
