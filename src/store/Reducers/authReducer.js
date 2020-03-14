@@ -4,9 +4,10 @@ const INITIAL_STATE = {
 };
 
 function authReducer(state = INITIAL_STATE, action) {
-	console.log(action);
+	// console.log(action);
 	switch (action.type) {
 		case 'SETDATA': {
+			// console.log("AUthReducer DAta :",action.payload.user.role);
 			return {
 				...state,
 				user: action.payload,

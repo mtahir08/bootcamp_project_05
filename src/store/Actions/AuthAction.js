@@ -2,7 +2,6 @@ import ActionTypes from './ActionsTypes';
 
 const AuthAction = {
 	setData: (obj) => {
-		console.log(obj);
 		return (dispatch) => {
 			const url = process.env.REACT_APP_LOGINAPI;
 			fetch(url, {
@@ -18,19 +17,16 @@ const AuthAction = {
 				.then((resposne) => resposne.json())
 				.then((data) => {
 					if (data.data.token) {
-						console.log(data);
-						localStorage.setItem('token', data.data.token);
 						dispatch({ type: ActionTypes.SETDATA, payload: data.data });
+						return(data.data);
 					}
 				})
 				.catch((error) => {
-					console.log({ error });
-					alert('please log in again');
+					alert('Login Fail');
 				});
 		};
 	},
 	add: (obj) => {
-		console.log(obj);
 		return (dispatch) => {
 			let url = process.env.REACT_APP_SIGNUPAPI;
 			fetch(url, {
@@ -45,11 +41,9 @@ const AuthAction = {
 				})
 			})
 				.then((resposne) => resposne.json())
-				.then((data) => {
-					console.log(data);
-				});
+				.then((data) => {});
 		};
-	}
+	},
 };
 
 export default AuthAction;
