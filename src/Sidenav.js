@@ -8,6 +8,7 @@ import ReceiptAdd from './Pages/receiptAdd';
 import Headbar from './Pages/Headerbar'
 import Input from './input';
 import { CloudinaryImagePage } from './Pages/CloudinaryImagePage';
+import ThemeToggler from "../src/ThemeToggler";
 import './sidenav.css'
 import {
     Route, BrowserRouter as Router, Link
