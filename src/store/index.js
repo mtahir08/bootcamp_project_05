@@ -1,6 +1,4 @@
-import { combineReducers } from 'redux';
-
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunk from 'redux-thunk';
 
 import { TodoReducer } from './Reducers';
