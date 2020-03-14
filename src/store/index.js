@@ -7,9 +7,10 @@ import thunk from 'redux-thunk';
 
 import { TodoReducer } from './Reducers';
 import { authReducer } from './Reducers/authReducer';
-import {receiptReducer} from './Reducers/receiptReducer'
+import {receiptReducer} from './Reducers/receiptReducer';
+import {receiptDetailReducer} from "./Reducers/receiptDetailReducer"
 const middleware = applyMiddleware(thunk);
-const rootReducer = combineReducers({ TodoReducer, authReducer ,receiptReducer});
+const rootReducer = combineReducers({ TodoReducer, authReducer ,receiptReducer,receiptDetailReducer});
 let store = createStore(rootReducer, middleware);
 
 export default store;

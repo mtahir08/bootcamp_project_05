@@ -3,13 +3,13 @@ const INITIAL_STATE = {
     Data: [],
 }
 
-function receiptReducer(state = INITIAL_STATE, action) {
+function receiptDetailReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
 
-        case 'ADD': {
+        case "SET_DATA": {
             return {
                 ...state,
-                Data: [...state.Data, action.payload]
+                Data: [...state.Data, action.payload.data.receipt]
             }
         }
        
@@ -17,4 +17,4 @@ function receiptReducer(state = INITIAL_STATE, action) {
     }
 }
 
-export { receiptReducer };
+export { receiptDetailReducer };

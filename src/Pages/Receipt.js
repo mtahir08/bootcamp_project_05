@@ -26,7 +26,7 @@ class Receipt extends Component {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTZjYzMxMmVjYWFhODAwMDQ2NzRjN2UiLCJyb2xlIjoiQSIsImV4cCI6MTU4NDE4OTc1MSwiaWF0IjoxNTg0MTg2MTUxfQ.WKnY76tD-b4rtj_aQ7wUWAqT1t_f_i2RYbYql0j0xyk"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTZjZDkxMTI4YmI4ZTAwMDRmMWQxMGYiLCJyb2xlIjoiQSIsImV4cCI6MTU4NDE5OTAyMCwiaWF0IjoxNTg0MTk1NDIwfQ.Gk6QPDkzNSRlj-tOxJ2F7YF-nqcVLhZjnf3oze7aAzU"
       }
     })
       .then((data) => data.json())
