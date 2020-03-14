@@ -1,5 +1,7 @@
 const ActionTypes = {
-    ADD: "ADD",
-}
+	ADD: 'ADD',
+	GETRECEIPT: 'GETRECEIPT',
+	GETUSER: 'GETUSER'
+};
 
-export default ActionTypes
+export default ActionTypes;

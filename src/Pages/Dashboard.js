@@ -1,7 +1,3 @@
-// Token and user data is comming from store of react-redux which is created from login information.
-// And now token can get from mapsStateToProps fucntion or in dash function
-// But I am still getting token from local storage beacuse of function running cycle or async behaviour
-
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import '../index.css';
@@ -9,251 +5,192 @@ import { Table } from 'react-bootstrap';
 import { useParams, useHistory } from 'react-router-dom';
 import UserTable from '../components/Dashboard/UserTable';
 import UserTableDetail from '../components/Dashboard/UserTableDetail';
+import DashboardAction from '../store/Actions/DashboardAction';
 import Side from '../Sidenav';
 import { Bar } from 'react-chartjs-2';
 
 const Dash = (props) => {
 	const [data, setData] = useState([]);
-	const [receipts, setReceipts] = useState([]);
-	let jan = 0,
-		feb = 0,
-		march = 0,
-		april = 0,
-		may = 0,
-		june = 0,
-		july = 0,
-		aug = 0,
-		sep = 0,
-		oct = 0,
-		nov = 0,
-		dec = 0;
-	let janUser = 0,
-		febUser = 0,
-		marchUser = 0,
-		aprilUser = 0,
-		mayUser = 0,
-		juneUser = 0,
-		julyUser = 0,
-		augUser = 0,
-		sepUser = 0,
-		octUser = 0,
-		novUser = 0,
-		decUser = 0;
+
+	let receiptMonths = {
+		jan: 0,
+		feb: 0,
+		march: 0,
+		april: 0,
+		may: 0,
+		june: 0,
+		july: 0,
+		aug: 0,
+		sep: 0,
+		oct: 0,
+		nov: 0,
+		dec: 0
+	};
+	let userMonths = {
+		jan: 0,
+		feb: 0,
+		march: 0,
+		april: 0,
+		may: 0,
+		june: 0,
+		july: 0,
+		aug: 0,
+		sep: 0,
+		oct: 0,
+		nov: 0,
+		dec: 0
+	};
+	const label = [
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December'
+	];
 	const [barDataReceipts, setBarDataReceipts] = useState({
-		labels: [
-			'January',
-			'February',
-			'March',
-			'April',
-			'May',
-			'June',
-			'July',
-			'August',
-			'September',
-			'October',
-			'November',
-			'December'
-		],
-		datasets: [{}]
+		labels: label,
+		datasets: []
 	});
 
 	const [barDataUser, setBarDataUser] = useState({
-		labels: [
-			'January',
-			'February',
-			'March',
-			'April',
-			'May',
-			'June',
-			'July',
-			'August',
-			'September',
-			'October',
-			'November',
-			'December'
-		],
-		datasets: [{}]
+		labels: label,
+		datasets: []
 	});
 
 	useEffect(() => {
 		console.log(props.user, props.token);
 		didMount();
-	}, [props.users]);
+	}, []);
 
+	useEffect(() => {
+		willRrecipeProps();
+	}, [props.receipts]);
+
+	const willRrecipeProps = () => {
+		if (props.users[1]) {
+			props.users.map((user) => {
+				console.log(user.createdAt);
+				const month = user.createdAt.substr(5, 2);
+				console.log(month);
+				if (month == '01') {
+					userMonths.jan++;
+				} else if (month === '02') {
+					userMonths.feb++;
+				} else if (month === '03') {
+					userMonths.march++;
+				} else if (month === '04') {
+					userMonths.april++;
+				} else if (month === '05') {
+					userMonths.may++;
+				} else if (month === '06') {
+					userMonths.june++;
+				} else if (month === '07') {
+					userMonths.july++;
+				} else if (month === '08') {
+					userMonths.aug++;
+				} else if (month === '09') {
+					userMonths.sep++;
+				} else if (month === '10') {
+					userMonths.oct++;
+				} else if (month === '11') {
+					userMonths.nov++;
+				} else if (month === '12') {
+					userMonths.dec++;
+				}
+			});
+			setBarDataUser({
+				datasets: [
+					{
+						label: 'User',
+						backgroundColor: 'rgba(75,192,192,1)',
+						borderColor: 'rgba(0,0,0,1)',
+						borderWidth: 2,
+						data: [
+							userMonths.jan,
+							userMonths.feb,
+							userMonths.march,
+							userMonths.april,
+							userMonths.may,
+							userMonths.june,
+							userMonths.july,
+							userMonths.aug,
+							userMonths.sep,
+							userMonths.oct,
+							userMonths.nov,
+							userMonths.dec
+						]
+					}
+				]
+			});
+			console.log(props.users);
+		}
+
+		if (props.receipts[1]) {
+			props.receipts.map((receipt, index) => {
+				console.log(receipt.month);
+				if (receipt.month == 'January') {
+					receiptMonths.jan++;
+				} else if (receipt.month === 'Feb') {
+					receiptMonths.feb++;
+				} else if (receipt.month === 'march') {
+					receiptMonths.march++;
+				} else if (receipt.month === 'April') {
+					receiptMonths.april++;
+				} else if (receipt.month === 'May') {
+					receiptMonths.may++;
+				} else if (receipt.month === 'june') {
+					receiptMonths.june++;
+				} else if (receipt.month === 'July') {
+					receiptMonths.july++;
+				} else if (receipt.month === 'August') {
+					receiptMonths.aug++;
+				} else if (receipt.month === 'Sep') {
+					receiptMonths.sep++;
+				} else if (receipt.month === 'oct') {
+					receiptMonths.oct++;
+				} else if (receipt.month === 'nov') {
+					receiptMonths.nov++;
+				} else if (receipt.month === 'dec') {
+					receiptMonths.dec++;
+				}
+			});
+			setBarDataReceipts({
+				datasets: [
+					{
+						label: 'Recipt',
+						backgroundColor: 'rgba(75,192,192,1)',
+						borderColor: 'rgba(0,0,0,1)',
+						borderWidth: 2,
+						data: [
+							receiptMonths.jan,
+							receiptMonths.feb,
+							receiptMonths.march,
+							receiptMonths.april,
+							receiptMonths.may,
+							receiptMonths.june,
+							receiptMonths.july,
+							receiptMonths.aug,
+							receiptMonths.sep,
+							receiptMonths.oct,
+							receiptMonths.nov,
+							receiptMonths.dec
+						]
+					}
+				]
+			});
+			console.log(props.receipts);
+		}
+	};
 	const didMount = () => {
-		const tokenObj = localStorage.getItem('token');
-		console.log(tokenObj);
-
-		let url = process.env.REACT_APP_DASHBOARDAPI;
-
-		fetch(url, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${tokenObj}`
-			}
-		})
-			.then((data) => {
-				data.json().then((res2) => {
-					console.log('res2', res2);
-					setData(res2.data.user);
-				});
-			})
-			.catch((error) => {
-				console.log({ error });
-			});
-
-		const urlReceipt = 'https://uitedemo.herokuapp.com/api/receipt';
-
-		fetch(urlReceipt, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${tokenObj}`
-			}
-		})
-			.then((data) => {
-				data.json().then((res) => {
-					console.log('receipt', res.data.receipt);
-					res.data.receipt.map((receipt) => {
-						if (receipt.month == 'January') {
-							jan++;
-						} else if (
-							receipt.month === 'Feb' ||
-							receipt.month === 'Febebruary'
-						) {
-							feb++;
-						} else if (receipt.month === 'march' || receipt.month === 'March') {
-							march++;
-						} else if (receipt.month === 'April' || receipt.month === 'april') {
-							april++;
-						} else if (receipt.month === 'May' || receipt.month === 'may') {
-							may++;
-						} else if (receipt.month === 'june' || receipt.month === 'June') {
-							june++;
-						} else if (receipt.month === 'July' || receipt.month === 'july') {
-							july++;
-						} else if (receipt.month === 'August') {
-							aug++;
-						} else if (
-							receipt.month === 'Sep' ||
-							receipt.month === 'September'
-						) {
-							sep++;
-						} else if (receipt.month === 'oct' || receipt.month === 'October') {
-							oct++;
-						} else if (
-							receipt.month === 'nov' ||
-							receipt.month === 'November'
-						) {
-							nov++;
-						} else if (
-							receipt.month === 'dec' ||
-							receipt.month === 'Decemeber'
-						) {
-							dec++;
-						}
-					});
-					setBarDataReceipts({
-						datasets: [
-							{
-								label: 'Recipt',
-								backgroundColor: 'rgba(0,255,0,0.3)',
-								borderColor: 'rgba(0,0,0,1)',
-								borderWidth: 2,
-								data: [
-									jan,
-									feb,
-									march,
-									april,
-									may,
-									june,
-									july,
-									aug,
-									sep,
-									oct,
-									nov,
-									dec
-								]
-							}
-						]
-					});
-				});
-			})
-			.catch((error) => {
-				console.log({ error });
-			});
-
-		const urlUser = 'https://uitedemo.herokuapp.com/api/users';
-
-		fetch(urlUser, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${tokenObj}`
-			}
-		})
-			.then((data) => {
-				data.json().then((res) => {
-					console.log('user', res.data.user);
-					res.data.user.map((user) => {
-						const month = user.createdAt.substr(5, 2);
-						console.log(month);
-						if (month == '01') {
-							janUser++;
-						} else if (month === '02') {
-							febUser++;
-						} else if (month === '03') {
-							marchUser++;
-						} else if (month === '04') {
-							aprilUser++;
-						} else if (month === '05') {
-							mayUser++;
-						} else if (month === '06') {
-							juneUser++;
-						} else if (month === '07') {
-							julyUser++;
-						} else if (month === '08') {
-							augUser++;
-						} else if (month === '09') {
-							sepUser++;
-						} else if (month === '10') {
-							octUser++;
-						} else if (month === '11') {
-							novUser++;
-						} else if (month === '12') {
-							decUser++;
-						}
-					});
-					setBarDataUser({
-						datasets: [
-							{
-								label: 'User',
-								backgroundColor: 'rgba(75,192,192,1)',
-								borderColor: 'rgba(0,0,0,1)',
-								borderWidth: 2,
-								data: [
-									janUser,
-									febUser,
-									marchUser,
-									aprilUser,
-									mayUser,
-									juneUser,
-									julyUser,
-									augUser,
-									sepUser,
-									octUser,
-									novUser,
-									decUser
-								]
-							}
-						]
-					});
-				});
-			})
-			.catch((error) => {
-				console.log({ error });
-			});
+		props.GETRECEIPT({});
+		props.GETUSER({});
 	};
 
 	const graph = () => {
@@ -305,16 +242,27 @@ const Dash = (props) => {
 };
 
 function mapStateToProps(state) {
-	console.log(state);
+	console.log(state.dashboardReducer.user);
 	return {
 		user: state.users,
-		token: state.token
+		token: state.token,
+		users: state.dashboardReducer.user,
+		receipts: state.dashboardReducer.receipt
 	};
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		Add: (data) => dispatch({ type: 'ADD', payload: data })
+		Add: (data) => dispatch({ type: 'ADD', payload: data }),
+		// GET: (data) => dispatch({ type: 'GET', payload: data }),
+		GETRECEIPT: (obj) => {
+			console.log(obj);
+			dispatch(DashboardAction.getRecipt(obj));
+		},
+		GETUSER: (obj) => {
+			console.log(obj);
+			dispatch(DashboardAction.getUser(obj));
+		}
 	};
 }
 
