@@ -1,8 +1,11 @@
 import ActionTypes from './ActionsTypes';
+import { useHistory } from "react-router-dom";
 
 const AuthAction = {
 	setData: (obj) => {
 		console.log(obj);
+		// let history = useHistory();
+		// 				console.log(history);
 		return (dispatch) => {
 			const url = process.env.REACT_APP_LOGINAPI;
 			fetch(url, {
@@ -18,14 +21,22 @@ const AuthAction = {
 				.then((resposne) => resposne.json())
 				.then((data) => {
 					if (data.data.token) {
-						console.log(data);
+						console.log(data.data.user.role);
 						localStorage.setItem('token', data.data.token);
 						dispatch({ type: ActionTypes.SETDATA, payload: data.data });
+						return(data.data);
+					// if(data.data.user.role == "S"){
+					// 	alert('login Successful Student')
+					// } else {
+					// 	alert('login Successful admin')
+					// }
+						// 	{data.data.user.role == "S" ? {
+					// alert('login Successful')}: null }
 					}
 				})
 				.catch((error) => {
 					console.log({ error });
-					alert('please log in again');
+					alert('Login Fail');
 				});
 		};
 	},

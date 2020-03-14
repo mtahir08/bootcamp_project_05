@@ -33,7 +33,8 @@ const Dash = (props) => {
 			}
 		})
 			.then((data) => {
-				data.json().then((res2) => {
+				data.json()
+				.then((res2) => {
 					console.log('res2', res2);
 					setData(res2.data.user);
 				});

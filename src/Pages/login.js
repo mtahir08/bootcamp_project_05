@@ -9,18 +9,33 @@ import '../styles/login.css';
 
 const Login = (props) => {
 	const [input, setInput] = useState({});
-
+	useEffect(()=>{
+		// console.log("user data ",props)
+		const data = props.user;
+		console.log(data)
+		if(data.user)
+		{
+			// console.log(data)
+			if(data.user.role === "S")
+			props.history.push('/studentDashboard');
+			else
+			props.history.push('/dashboard');
+		}
+	},[props.user])
 	const generalHandler = (e) =>
 		setInput({
 			...input,
 			[e.target.id]: e.target.value
 		});
 
-	const handleSumbit = () => {
+	const handleSumbit = async () => {
 		console.log(input.email, input.password);
-		props.SETDATA({ email: input.email, password: input.password });
-    props.history.push('/dashboard');
+		 props.SETDATA({ email: input.email, password: input.password });
+		// // console.log("user data ",props)
+		// console.log(userData)
+    // props.history.push('/dashboard');
 	};
+	
 	return (
 		<div
 		 className="login-main"
@@ -79,7 +94,7 @@ const Login = (props) => {
 
 function mapStateToProps(state) {
 	return {
-		user: state.user
+		user: state.authReducer.user
 	};
 }
 
