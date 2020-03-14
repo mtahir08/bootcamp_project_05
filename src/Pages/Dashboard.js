@@ -14,7 +14,6 @@ import Side from '../Sidenav';
 
 const Dash = (props) => {
 	const [data, setData] = useState([]);
-
 	useEffect(() => {
 		
 		didMount();
@@ -23,8 +22,7 @@ const Dash = (props) => {
 	const didMount = () => {
 		const tokenObj = localStorage.getItem('token');
 	
-		
-		let url = 'https://uitedemo.herokuapp.com/api/users';
+		let url = process.env.REACT_APP_DASHBOARDAPI;
 
 		fetch(url, {
 			method: 'GET',
@@ -52,7 +50,7 @@ const Dash = (props) => {
 			<div className="container">
 				<Table striped bordered hover>
 					<UserTable />
-					<UserTableDetail userData={data} />
+					<UserTableDetail userData={data.data} />
 				</Table>
 			</div>
 		</div>
