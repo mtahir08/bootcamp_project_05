@@ -8,7 +8,7 @@ function UserDetail(props) {
         <td>{user._id}</td>
         <td>{user.email}</td>
         <td>{user.gender}</td>
-        <td>{user.createdAt.split('-')[0]}</td>
+        <td>{user.createdAt}</td>
         <td>
           <Link
             to={{
