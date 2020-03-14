@@ -15,7 +15,7 @@ const TodoActions = {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
-                    'Accept': 'application/json',
+                    
                     'origin': '',
 
 

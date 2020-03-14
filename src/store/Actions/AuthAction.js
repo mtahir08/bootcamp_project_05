@@ -1,6 +1,24 @@
 import ActionTypes from './ActionsTypes';
 
 const AuthAction = {
+	setAdminData: (obj) => {
+		console.log(obj)
+		return (dispatch) => {
+			const url = process.env.REACT_APP_DASHBOARDAPI;
+			fetch(url, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${obj.token}`
+				}
+			})
+				.then((resposne) => resposne.json())
+				.then((data) => {
+					console.log("Inside Store", data)
+					dispatch({ type: ActionTypes.SETADMINDATA, payload: data.data });
+				})
+		}
+	},
 	setData: (obj) => {
 		return (dispatch) => {
 			const url = process.env.REACT_APP_LOGINAPI;
@@ -18,7 +36,7 @@ const AuthAction = {
 				.then((data) => {
 					if (data.data.token) {
 						dispatch({ type: ActionTypes.SETDATA, payload: data.data });
-						return(data.data);
+						return (data.data);
 					}
 				})
 				.catch((error) => {
@@ -41,9 +59,32 @@ const AuthAction = {
 				})
 			})
 				.then((resposne) => resposne.json())
-				.then((data) => {});
+				.then((data) => { });
 		};
 	},
+	edit: (obj) => {
+		console.log(obj);
+		return (dispatch) => {
+			let url = process.env.REACT_APP_DASHBOARDAPI;
+			fetch(url, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + localStorage.getItem('token')
+				},
+				body: JSON.stringify({
+					name: obj.name,
+					email: `${obj.email}`,
+					password: `${obj.password}`
+				})
+			})
+				.then((resposne) => resposne.json())
+				.then((data) => {
+					console.log(data);
+				});
+		};
+	}
+
 };
 
 export default AuthAction;

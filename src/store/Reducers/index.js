@@ -12,6 +12,7 @@ function TodoReducer(state = INITIAL_STATE, action) {
                 Data: [...state.Data, action.payload]
             }
         }
+    
         case 'SETDATA': {
             return {
                 ...state,

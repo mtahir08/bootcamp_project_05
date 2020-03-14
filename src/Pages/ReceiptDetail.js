@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import receiptDetailAction from "../store/Actions/ReceiptDetailAction"
 import Img from "./images/images.png"
-import "../../index.css"
+import "../index.css"
 
 function mapDispatchToProps(dispatch) {
     return {

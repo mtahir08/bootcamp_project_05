@@ -1,12 +1,8 @@
-// Token and user data is comming from store of react-redux which is created from login information.
-// And now token can get from mapsStateToProps fucntion or in dash function
-// But I am still getting token from local storage beacuse of function running cycle or async behaviour
-
-import React, { useEffect, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-// import '../index.css';
-import { Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap'
 import { useParams, useHistory } from 'react-router-dom';
+// import '../index.css';
 import UserTable from '../components/Dashboard/UserTable';
 import UserTableDetail from '../components/Dashboard/UserTableDetail';
 
@@ -16,7 +12,6 @@ const Dash = (props) => {
 
 		didMount();
 	}, [props.users]);
-
 	const didMount = () => {
 		const tokenObj = localStorage.getItem('token');
 
@@ -43,36 +38,36 @@ const Dash = (props) => {
 				console.log(error)
 			});
 	};
-
 	return (
+		<div>
 
-
-		<Table className="table" >
-			<UserTable />
-			<UserTableDetail userData={data.data} />
-		</Table>
-
-
+			<div className="container">
+				<Table striped bordered hover>
+					<UserTable />
+					<UserTableDetail userData={data} />
+				</Table>
+			</div>
+		</div>
 	);
-};
+}
 
 function mapStateToProps(state) {
-
 	return {
-		user: state.users,
-		token: state.token
-	};
+		users: state.authReducer.users
+	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		Add: (data) => dispatch({ type: 'ADD', payload: data })
+		Add: (data) => dispatch({ type: 'ADD', payload: data }),
+		SETADMINDATA: (obj) => dispatch({ type: 'SETADMINDATA', payload: obj })
 	};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dash);
 
 function UserDetail() {
+	console.log('params', useParams());
 	const { userId } = useParams()
 
 	const history = useHistory()
@@ -91,16 +86,19 @@ function UserDetail() {
 			});
 	}, []);
 
-	return (<Table className="table">
-		<UserTable />
+	return (
+		<div className="container">
+			<Table striped bordered hover>
+				<UserTable />
 
-		{isLoading ? (
-			<h1>Loading...</h1>
-		) : (
-				<UserTableDetail userData={userDetail} />
-			)}
-	</Table>
+				{isLoading ? (
+					<h1>Loading...</h1>
+				) : (
+						<UserTableDetail userData={userDetail} />
+					)}
+			</Table>
+		</div>
 
 	);
 }
-export { UserDetail };
+export { UserDetail }
