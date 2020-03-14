@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function UserDetail(props) {
-  
-  const userData = props.userData  ? props.userData.map(user => {
+
+  const userData = props.userData ? props.userData.map(user => {
     return (
       <tr key={user._id}>
         <td>{user._id}</td>
@@ -26,7 +26,6 @@ function UserDetail(props) {
   return (
     <tbody>
       {userData}
-      { console.log( 'aa' , userData) }
     </tbody>
   )
 }
