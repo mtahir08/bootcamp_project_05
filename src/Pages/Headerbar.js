@@ -12,8 +12,7 @@ class Headerbar extends React.Component {
 
       const user = localStorage.getItem('user');
 
-      console.log('user' , user)
-console.log('propsuser' , this.props)
+    
         return(
             <>
 
