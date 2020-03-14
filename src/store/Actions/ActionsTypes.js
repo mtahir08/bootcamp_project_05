@@ -1,6 +1,7 @@
 const ActionTypes = {
     ADD: "ADD",
-    SETDATA :"SETDATA"
+    SETDATA :"SETDATA",
+    SETSTUDENT:'SETSTUDENT'
 }
 
 export default ActionTypes
