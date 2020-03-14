@@ -3,12 +3,13 @@ import thunk from 'redux-thunk';
 
 import { TodoReducer } from './Reducers';
 import { authReducer } from './Reducers/authReducer';
+import { dashboardReducer } from './Reducers/dashboardReducer';
 import { receiptReducer } from './Reducers/receiptReducer';
 import { receiptDetailReducer } from "./Reducers/receiptDetailReducer"
 import { studentReducer } from './Reducers/studentReducer';
 
 const middleware = applyMiddleware(thunk);
-const rootReducer = combineReducers({ TodoReducer, authReducer, receiptReducer, receiptDetailReducer, studentReducer });
+const rootReducer = combineReducers({ TodoReducer, authReducer, dashboardReducer, receiptReducer, receiptDetailReducer, studentReducer });
 
 let store = createStore(rootReducer, middleware);
 
