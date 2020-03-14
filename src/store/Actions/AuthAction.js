@@ -1,4 +1,5 @@
 import ActionTypes from './ActionsTypes';
+import EmailJsServive from '../../Services/EmailJS';
 
 const AuthAction = {
 	setAdminData: (obj) => {
@@ -19,7 +20,7 @@ const AuthAction = {
 				})
 		}
 	},
-	setData: (obj) => {
+	login: (obj) => {
 		return (dispatch) => {
 			const url = process.env.REACT_APP_LOGINAPI;
 			fetch(url, {
@@ -27,15 +28,17 @@ const AuthAction = {
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify({
-					email: `${obj.email}`,
-					password: `${obj.password}`
-				})
+				body: JSON.stringify(obj)
 			})
-				.then((resposne) => resposne.json())
+				.then((response) => {
+					if (response.status === 200) {
+						return response.json()
+					}
+					throw response
+				})
 				.then((data) => {
 					if (data.data.token) {
-						dispatch({ type: ActionTypes.SETDATA, payload: data.data });
+						dispatch({ type: ActionTypes.LOGIN, payload: data.data });
 						return (data.data);
 					}
 				})
@@ -45,21 +48,41 @@ const AuthAction = {
 		};
 	},
 	add: (obj) => {
-		return (dispatch) => {
+		return async (dispatch) => {
 			let url = process.env.REACT_APP_SIGNUPAPI;
-			fetch(url, {
+			return await fetch(url, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify({
-					name: obj.name,
-					email: `${obj.email}`,
-					password: `${obj.password}`
-				})
+				body: JSON.stringify(obj)
 			})
-				.then((resposne) => resposne.json())
-				.then((data) => { });
+				.then((resposne) => {
+					if (resposne.status === 200) {
+						return resposne.json()
+					}
+					throw resposne
+				})
+				.then(async () => {
+					var templateParams = {
+						senderEmail: process.env.REACT_APP_EMAIL_JS,
+						receiverEmail: obj.email,
+						toName: obj.name,
+						password: obj.password
+					};
+
+					await EmailJsServive.sendEmailJsServive(
+						process.env.REACT_APP_TEMPLATE_ID,
+						templateParams,
+						process.env.REACT_APP_USER_ID
+					);
+					return true;
+
+				})
+				.catch((error) => {
+					console.log(error)
+					return false;
+				})
 		};
 	},
 	edit: (obj) => {
