@@ -4,60 +4,60 @@
 
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import '../index.css';
+// import '../index.css';
 import { Table } from 'react-bootstrap';
 import { useParams, useHistory } from 'react-router-dom';
 import UserTable from '../components/Dashboard/UserTable';
 import UserTableDetail from '../components/Dashboard/UserTableDetail';
 
-import Side from '../Sidenav';
-
 const Dash = (props) => {
 	const [data, setData] = useState([]);
 	useEffect(() => {
-		
+
 		didMount();
 	}, [props.users]);
 
 	const didMount = () => {
 		const tokenObj = localStorage.getItem('token');
-	
+
 		let url = process.env.REACT_APP_DASHBOARDAPI;
 
 		fetch(url, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
-				"Authorization": `Bearer ${tokenObj}`  
+				"Authorization": `Bearer ${tokenObj}`
 			}
 		})
 			.then((data) => {
-				data.json()
-					.then(res2 => {
-					
-						setData({ data: res2.data.user })
-
-					})
+				if (data.status === 200) {
+					return data.json()
+				}
+				throw data;
+			})
+			.then(res2 => {
+				console.log({ res2 });
+				setData({ data: res2.data.user })
 			})
 			.catch((error) => {
-				
+				console.log(error)
 			});
 	};
 
 	return (
-		<div>
-			<div className="container">
-				<Table striped bordered hover>
-					<UserTable />
-					<UserTableDetail userData={data.data} />
-				</Table>
-			</div>
-		</div>
+
+
+		<Table className="table" >
+			<UserTable />
+			<UserTableDetail userData={data.data} />
+		</Table>
+
+
 	);
 };
 
 function mapStateToProps(state) {
-	
+
 	return {
 		user: state.users,
 		token: state.token
@@ -82,7 +82,7 @@ function UserDetail() {
 	useEffect(() => {
 		setIsLoading(true);
 		let url = process.env.REACT_APP_DASHBOARDAPI;
-		
+
 		fetch(url + userId)
 			.then((response) => response.json())
 			.then((response) => {
@@ -91,18 +91,16 @@ function UserDetail() {
 			});
 	}, []);
 
-	return (
-		<div className="container">
-			<Table striped bordered hover>
-				<UserTable />
+	return (<Table className="table">
+		<UserTable />
 
-				{isLoading ? (
-					<h1>Loading...</h1>
-				) : (
-						<UserTableDetail userData={userDetail} />
-					)}
-			</Table>
-		</div>
+		{isLoading ? (
+			<h1>Loading...</h1>
+		) : (
+				<UserTableDetail userData={userDetail} />
+			)}
+	</Table>
+
 	);
 }
 export { UserDetail };
