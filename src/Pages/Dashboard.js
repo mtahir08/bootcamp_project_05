@@ -2,7 +2,7 @@ import React, { Component, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'react-bootstrap'
 import { useParams, useHistory } from 'react-router-dom';
-import '../index.css';
+// import '../index.css';
 import UserTable from '../components/Dashboard/UserTable';
 import UserTableDetail from '../components/Dashboard/UserTableDetail';
 
@@ -12,25 +12,43 @@ const Dash = (props) => {
 
 		didMount();
 	}, [props.users]);
-
 	const didMount = () => {
 		const tokenObj = localStorage.getItem('token');
-		props.SETADMINDATA({ token: tokenObj });
 
-	}
-	render() {
-		return (
-			<div>
+		let url = process.env.REACT_APP_DASHBOARDAPI;
 
-				<div className="container">
-					<Table striped bordered hover>
-						<UserTable />
-						<UserTableDetail userData={this.state.data} />
-					</Table>
-				</div>
-			</div>
-		);
+		fetch(url, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				"Authorization": `Bearer ${tokenObj}`
+			}
+		})
+			.then((data) => {
+				if (data.status === 200) {
+					return data.json()
+				}
+				throw data;
+			})
+			.then(res2 => {
+				console.log({ res2 });
+				setData({ data: res2.data.user })
+			})
+			.catch((error) => {
+				console.log(error)
+			});
 	};
+	return (
+		<div>
+
+			<div className="container">
+				<Table striped bordered hover>
+					<UserTable />
+					<UserTableDetail userData={data} />
+				</Table>
+			</div>
+		</div>
+	);
 }
 
 function mapStateToProps(state) {
