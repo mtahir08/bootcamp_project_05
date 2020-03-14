@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import '../index.css';
 import { Table } from 'react-bootstrap';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import UserTable from '../components/Dashboard/UserTable';
 import UserTableDetail from '../components/Dashboard/UserTableDetail';
 import Side from '../Sidenav';
@@ -48,7 +48,7 @@ const Dash = (props) => {
 			<div className="container">
 				<Table striped bordered hover>
 					<UserTable />
-					<UserTableDetail userData={this.state.data} />
+					<UserTableDetail userData={data} />
 				</Table>
 			</div>
 		</div>
