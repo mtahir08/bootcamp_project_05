@@ -14,27 +14,12 @@ class Dash extends Component {
 	}
 	componentDidMount() {
 		const tokenObj = localStorage.getItem('token');
-		this.setState({ isLoading: true })
-		let url = process.env.REACT_APP_DASHBOARDAPI
-		fetch(url, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				"Authorization": 'Bearer ' + tokenObj //"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTY0YzRhOGY3MmNhYzAwMDRkODZiMjgiLCJleHAiOjE1ODM2NzAyMzQsImlhdCI6MTU4MzY2NjYzNH0.LudbvSRTcMoYiUlq65K4f0o6RRKEhhhZeUYVpFbREq4"
-			}
-		})
-			.then((data) => {
-				data.json()
-					.then(res2 => {
-						console.log('res2', res2)
-						this.setState({ data: res2.data.user })
+		this.setState({ isLoading: true });
+		this.props.SETADMINDATA({token:tokenObj});
+	}
 
-					})
-
-			})
-			.catch((error) => {
-				console.log({ error })
-			})
+	componentWillReceiveProps(nextProps){
+		console.log(nextProps.users)
 	}
 
 	render() {
@@ -52,15 +37,20 @@ class Dash extends Component {
 	};
 }
 
-
-export default connect(null, mapDispatchToProps)(Dash);
-
+function mapStateToProps(state){
+	return{
+		users: state.authReducer.users
+	}
+}
 
 function mapDispatchToProps(dispatch) {
 	return {
 		Add: (data) => dispatch({ type: 'ADD', payload: data }),
+		SETADMINDATA:(obj)=> dispatch({ type: 'SETADMINDATA', payload: obj})
 	};
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dash);
 
 function UserDetail() {
 	console.log('params', useParams());

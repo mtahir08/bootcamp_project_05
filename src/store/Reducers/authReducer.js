@@ -13,6 +13,12 @@ function authReducer(state = INITIAL_STATE, action) {
 				token: action.payload.token
 			};
 		}
+		case 'GETADMINDATA': {
+			return{
+				...state,
+				users:action.payload
+			}
+		}
 		case 'EDIT':{
 			return{
 				...state,

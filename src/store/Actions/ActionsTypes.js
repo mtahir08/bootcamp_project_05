@@ -1,6 +1,7 @@
 const ActionTypes = {
     ADD: "ADD",
-    EDIT: "EDIT"
+    EDIT: "EDIT",
+    SETADMINDATA: "SETADMINDATA"
 }
 
 export default ActionTypes
