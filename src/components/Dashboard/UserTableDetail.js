@@ -2,7 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function UserDetail(props) {
-  const userData = props.userData.length ? props.userData.data.map(user => {
+  console.log(props);
+  const userData = props.userData && props.userData.data && props.userData.data.length ? props.userData.data.map(user => {
     return (
       <tr key={user._id}>
         <td>{user._id}</td>

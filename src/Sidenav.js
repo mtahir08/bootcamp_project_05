@@ -1,7 +1,5 @@
 import React, { Component, Image } from 'react'
-import SideNav, {  NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
-import Photo from './Pages/photo.jpg'
-// import Input from './input'
+import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import Dash, { UserDetail } from './Pages/Dashboard';
@@ -11,7 +9,8 @@ import Headbar from './Pages/Headerbar'
 import Input from './input';
 import { CloudinaryImagePage } from './Pages/CloudinaryImagePage';
 import './sidenav.css'
-import {Route,BrowserRouter as Router, Link
+import {
+    Route, BrowserRouter as Router, Link
 } from "react-router-dom";
 
 function Side() {
@@ -35,12 +34,12 @@ function Side() {
                         }}
                     >
 
-                            <br></br>
+                        <br></br>
                         <SideNav.Toggle />
-                      
-                       
 
-                 
+
+
+
 
                         <SideNav.Nav defaultSelected="dashboard" className="navitems" variant="light"  >
                             <NavItem eventKey="dashboard" className="Navitems"  >
@@ -63,8 +62,6 @@ function Side() {
 
                             </NavItem>
 
-
-
                             <NavItem eventKey="signout" className="Navitems">
                                 <NavIcon>
                                     <i className="fa fa-fw fa-home" />
@@ -77,7 +74,7 @@ function Side() {
 
 
                         </SideNav.Nav>
-                
+
                     </SideNav>
 
 
@@ -94,7 +91,7 @@ function Side() {
 
                     </main>
 
-                    
+
 
                 </React.Fragment>
 
