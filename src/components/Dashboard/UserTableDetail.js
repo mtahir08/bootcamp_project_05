@@ -8,7 +8,7 @@ function UserDetail(props) {
   function editUser(id) {
     console.log(id)
 
-    history.push('/input',id)
+    history.push('/input', id)
   }
 
   const userData = props.userData.length ? props.userData.map(user => {
@@ -29,9 +29,9 @@ function UserDetail(props) {
           >View</Link>
           <EditIcon onClick={() => { editUser(user) }} />
         </td>
-      </tr>
+      </tr >
     )
-  }) : null
+  }) : ''
   return (
     <tbody>
       {userData}
