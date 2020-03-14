@@ -24,14 +24,14 @@ code {
 }
 .container {
   /* margin: 20px; */
-  background-color: rgb(24, 24, 26);
+  /* background-color: rgb(24, 24, 26); */
   width: 60%;
   height: 60%;
   /* align-items: center; */
   color: azure;
 /* margin-left: 50px; */
 padding: 3% ;
-border: 5px solid rgb(51, 0, 0);
+/* border: 5px solid rgb(51, 0, 0); */
 border-radius: 40px ;
 transition: 2s;
 }
