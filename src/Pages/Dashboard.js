@@ -4,7 +4,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import '../index.css';
+// import '../index.css';
 import { Table } from 'react-bootstrap';
 import { useParams, useHistory } from 'react-router-dom';
 import UserTable from '../components/Dashboard/UserTable';
@@ -46,14 +46,14 @@ const Dash = (props) => {
 	};
 
 	return (
-		<div>
-			<div className="container">
-				<Table striped bordered hover>
+		
+			
+				<Table className="table" >
 					<UserTable />
 					<UserTableDetail userData={data.data} />
 				</Table>
-			</div>
-		</div>
+			
+		
 	);
 };
 
@@ -92,9 +92,7 @@ function UserDetail() {
 			});
 	}, []);
 
-	return (
-		<div className="container">
-			<Table striped bordered hover>
+	return (<Table className="table">
 				<UserTable />
 
 				{isLoading ? (
@@ -103,7 +101,7 @@ function UserDetail() {
 						<UserTableDetail userData={userDetail} />
 					)}
 			</Table>
-		</div>
+		
 	);
 }
 export { UserDetail };

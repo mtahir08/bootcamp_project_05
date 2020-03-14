@@ -2,14 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function UserDetail(props) {
-  console.log(props);
-  const userData = props.userData && props.userData.data && props.userData.data.length ? props.userData.data.map(user => {
+  
+  const userData = props.userData  ? props.userData.map(user => {
     return (
       <tr key={user._id}>
         <td>{user._id}</td>
         <td>{user.email}</td>
         <td>{user.gender}</td>
-        <td>{user.createdAt.split('-')[0]}</td>
+        {/* <td>{user.createdAt.split('-')[0]}</td> */}
         <td>
           <Link
             to={{
@@ -26,6 +26,7 @@ function UserDetail(props) {
   return (
     <tbody>
       {userData}
+      { console.log( 'aa' , userData) }
     </tbody>
   )
 }
