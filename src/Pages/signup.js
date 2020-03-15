@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
+
 import AuthAction from '../store/Actions/AuthAction';
 import { TextInput } from '../components';
 import '../styles/signup.css';

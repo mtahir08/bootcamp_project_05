@@ -22,7 +22,7 @@ const AuthAction = {
 	},
 	login: (obj) => {
 		return (dispatch) => {
-			const url = process.env.REACT_APP_LOGINAPI;
+			const url = process.env.REACT_APP_ENDPOINT + 'auth/signin';
 			fetch(url, {
 				method: 'POST',
 				headers: {
@@ -39,6 +39,7 @@ const AuthAction = {
 				.then((data) => {
 					if (data.data.token) {
 						localStorage.setItem("token", data.data.token)
+						localStorage.setItem("userId", data.data.user._id)
 						dispatch({ type: ActionTypes.LOGIN, payload: data.data });
 						return (data.data);
 					}
@@ -50,7 +51,7 @@ const AuthAction = {
 	},
 	add: (obj) => {
 		return async (dispatch) => {
-			let url = process.env.REACT_APP_SIGNUPAPI;
+			let url = process.env.REACT_APP_ENDPOINT + 'auth/signup';
 			return await fetch(url, {
 				method: 'POST',
 				headers: {
@@ -83,6 +84,33 @@ const AuthAction = {
 				.catch((error) => {
 					console.log(error)
 					return false;
+				})
+		};
+	},
+	autoLogin: (obj) => {
+		return async (dispatch) => {
+			let url = process.env.REACT_APP_ENDPOINT + 'api/users/' + obj._id;
+			return await fetch(url, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${obj.token}`
+
+				}
+			})
+				.then((resposne) => {
+					if (resposne.status === 200) {
+						return resposne.json()
+					}
+					throw resposne
+				})
+				.then(({ data }) => {
+					dispatch({ type: ActionTypes.LOGIN, payload: { token: obj.token, user: data.user } });
+					return true;
+				})
+				.catch((error) => {
+					console.log(error)
+					return false
 				})
 		};
 	},
