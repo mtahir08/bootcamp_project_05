@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import Routes from './Router';
 import MyStore from './store';
-import AuthAction from './store/Actions/AuthAction';
+import { AuthAction } from './store/Actions';
 
 const App = () => {
     const [loading, setLoading] = useState(true);

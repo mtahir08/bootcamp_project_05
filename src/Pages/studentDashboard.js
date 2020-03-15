@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Table } from 'react-bootstrap';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import StudentAction from '../store/Actions/StudentAction';
+import { StudentAction } from '../store/Actions';
 import '../styles/studentDashboard.css';
 import Headbar from './Headerbar';
 

@@ -7,6 +7,7 @@ import ReceiptDetails from './Pages/ReceiptDetail';
 import ReceiptAdd from './Pages/receiptAdd';
 import Headbar from './Pages/Headerbar'
 import Input from './input';
+import { Users } from './Pages/Users';
 import { SidebarItem } from './components/NavItem';
 import { CloudinaryImagePage } from './Pages/CloudinaryImagePage';
 import './sidenav.css'
@@ -59,6 +60,16 @@ function Side() {
                                 color="white"
                             /> */}
 
+                            <NavItem eventKey="users" className="Navitems">
+                                <NavIcon>
+                                    <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                                </NavIcon>
+                                <NavText style={{ color: 'black' }}>
+
+                                    Users
+                                </NavText>
+
+                            </NavItem>
                             <NavItem eventKey="input" className="Navitems">
                                 <NavIcon>
                                     <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
@@ -95,6 +106,7 @@ function Side() {
 
 
                         <Route path="/input" exact component={Input} />
+                        <Route path="/users" exact component={Users} />
                         <Route path="/update" component={Input} />
                         <Route path="/cloudinary" component={CloudinaryImagePage} />
                         <Route exact path="/dashboard" component={Dash} />

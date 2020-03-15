@@ -1,19 +1,16 @@
 import React from 'react'
 
-function UserTable() {
+function UserTableHead() {
     return (
-    
-            <thead>
+        <thead>
             <tr>
                 <th>Id</th>
                 <th>Email</th>
                 <th>Gender</th>
                 <th>Year</th>
             </tr>
-            </thead>
-            
-    
+        </thead>
     )
 }
 
-export default UserTable
+export default UserTableHead

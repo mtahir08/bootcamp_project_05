@@ -2,12 +2,10 @@ import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import EditIcon from '@material-ui/icons/Edit';
 
-function UserDetail(props) {
+function UserTableRow(props) {
   const history = useHistory()
 
   function editUser(id) {
-    console.log(id)
-
     history.push('/input', id)
   }
 
@@ -38,4 +36,4 @@ function UserDetail(props) {
     </tbody>
   )
 }
-export default UserDetail
+export default UserTableRow

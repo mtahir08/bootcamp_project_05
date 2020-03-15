@@ -1,53 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux'
-import { useHistory, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+import { useHistory, useParams, useLocation } from 'react-router-dom';
 
 import './index.css'
-import UserActions from './store/Actions/index';
+import { UsersAction } from './store/Actions';
 import { TextInput } from './components';
-
-function mapStateToProps(state) {
-
-    return {
-        editingItem: state.editingItem
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        Add: (obj) => dispatch(UserActions.Add(obj)),
-
-    }
-}
 
 const Input = (props) => {
     console.log(props)
     const [name, setName] = useState("")
-    var emailEdit = "" //props.history.location.state ? props.history.location.state.email : 
     const params = useParams()
     const history = useHistory()
-    const [email, setEmail] = useState(emailEdit)
+    const location = useLocation()
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState("")
-    const [isEdit, setIsEdit] = useState(props.history.location.state ? true : false)
-    // const [Office, setOffice] = useState("")
-    // const [Time, settime] = useState(new Date())
+    const [isEdit, setIsEdit] = useState(false)
 
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(props.editingItem);
-        if (props.editingItem) {
-            setName(props.editingItem.text)
+        if (location.state) {
+            setEmail(location.state.email)
+            setName(location.state.name)
+            setIsEdit(true)
         }
-    }, [props.editingItem])
-    useEffect(() => {
-        console.log(params, history)
-
     }, [])
-
-    const show_input = () => {
-        console.log('show', document.getElementById('add'))
-    }
-
 
     return <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
         <div id="input" className="abc">
@@ -56,6 +33,7 @@ const Input = (props) => {
                 title="name"
                 type="text"
                 id="name"
+                value={name}
                 onChange={ev => { setName(ev.target.value) }}
             />
             <TextInput
@@ -63,6 +41,7 @@ const Input = (props) => {
                 title="Email"
                 type="email"
                 id="Email"
+                value={email}
                 onChange={ev => { setEmail(ev.target.value) }}
             />
             <TextInput
@@ -70,6 +49,7 @@ const Input = (props) => {
                 title="Password"
                 type="password"
                 id="Password"
+                value={password}
                 onChange={ev => { setPassword(ev.target.value) }}
             />
 
@@ -78,17 +58,14 @@ const Input = (props) => {
 
             <button className="btn btn-block signup-btn" onClick={() => {
                 if (!isEdit) {
-
-                    props.Add({ name, email, password })
+                    dispatch(UsersAction.Add({ name, email, password }))
                     // let to = '/'+ 'dashboard' ;
                     history.push('/dashboard');
 
                 } else {
-                    props.Edit({ name, email, password })
+                    dispatch(UsersAction.edit({ name, email, password }))
                     history.push('/dashboard')
                 }
-                // document.getElementById('input').classList.add("hide")
-                // document.getElementById('add').classList = "hide btn btn-danger" 
             }}> {isEdit ? <>Edit</> : <>Add</>} </button>
 
 
@@ -96,5 +73,4 @@ const Input = (props) => {
     </div >
 
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Input)
+export default Input

@@ -117,7 +117,6 @@ const AuthAction = {
 		};
 	},
 	edit: (obj) => {
-		console.log(obj);
 		return (dispatch) => {
 			let url = process.env.REACT_APP_DASHBOARDAPI;
 			fetch(url, {
@@ -141,4 +140,4 @@ const AuthAction = {
 
 };
 
-export default AuthAction;
+export { AuthAction };

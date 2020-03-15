@@ -23,4 +23,4 @@ const StudentAction = {
     },
 }
 
-export default StudentAction;
+export { StudentAction };
