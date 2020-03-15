@@ -2,24 +2,6 @@ import ActionTypes from './ActionsTypes';
 import EmailJsServive from '../../Services/EmailJS';
 
 const AuthAction = {
-	setAdminData: (obj) => {
-		console.log(obj)
-		return (dispatch) => {
-			const url = process.env.REACT_APP_DASHBOARDAPI;
-			fetch(url, {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${obj.token}`
-				}
-			})
-				.then((resposne) => resposne.json())
-				.then((data) => {
-					console.log("Inside Store", data)
-					dispatch({ type: ActionTypes.SETADMINDATA, payload: data.data });
-				})
-		}
-	},
 	login: (obj) => {
 		return (dispatch) => {
 			const url = process.env.REACT_APP_ENDPOINT + 'auth/signin';

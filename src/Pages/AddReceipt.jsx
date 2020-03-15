@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button } from 'react-bootstrap';
 import { getCloudinaryUrl } from '../utils/cloudinary';
-import { addReceipt } from '../store/Actions/AddReceiptAction';
+import { ReceiptAction } from '../store/Actions';
 
 
 class AddReceipt extends Component {
@@ -128,7 +128,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addReceipt: (obj) => dispatch(addReceipt(obj))
+        addReceipt: (obj) => dispatch(ReceiptAction.addReceipt(obj))
     }
 }
 export default connect(

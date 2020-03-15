@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Table } from 'react-bootstrap';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import { StudentAction } from '../store/Actions';
+import { UsersAction } from '../store/Actions';
 import '../styles/studentDashboard.css';
 import Headbar from './Headerbar';
 
@@ -15,7 +15,7 @@ class StudentDashboard extends Component {
     componentDidMount = () => {
         const id = this.props.user.user._id;
         const token = this.props.user.token;
-        this.props.SETSTUDENT(id, token);
+        this.props.getUser(id, token);
     }
     componentWillReceiveProps(nextProp) {
         if (nextProp.userData)
@@ -77,8 +77,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        SETSTUDENT: (id, token) => {
-            dispatch(StudentAction.setStudent(id, token));
+        getUser: (id, token) => {
+            dispatch(UsersAction.getUser(id, token));
         }
     };
 }

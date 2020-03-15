@@ -1,5 +1,5 @@
 import { UsersAction } from './UserActions'
 import { AuthAction } from './AuthAction'
-import { StudentAction } from './StudentAction'
+import { ReceiptAction } from './ReceiptAction'
 
-export { UsersAction, AuthAction, StudentAction }
+export { UsersAction, AuthAction, ReceiptAction }

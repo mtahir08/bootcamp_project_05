@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Video, Transformation, CloudinaryContext } from 'cloudinary-react';
+// import { Image, Video, Transformation, CloudinaryContext } from 'cloudinary-react';
 
 class CloudinaryImagePage extends Component {
     constructor() {

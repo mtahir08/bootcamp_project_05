@@ -1,3 +1,4 @@
+import ActionTypes from '../Actions/ActionsTypes';
 const INITIAL_STATE = {
 	user: {},
 	token: ''
@@ -5,25 +6,12 @@ const INITIAL_STATE = {
 
 function authReducer(state = INITIAL_STATE, action) {
 	switch (action.type) {
-		case 'LOGIN': {
+		case ActionTypes.LOGIN: {
 			return {
 				...state,
 				user: action.payload,
 				token: action.payload.token
 			};
-		}
-		case 'GETADMINDATA': {
-			return {
-				...state,
-				users: action.payload
-			}
-		}
-		case 'EDIT': {
-			return {
-				...state,
-				user: action.payload,
-				token: action.payload.token
-			}
 		}
 		default:
 			return state;

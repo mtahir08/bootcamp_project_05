@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Table } from 'react-bootstrap'
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Bar } from 'react-chartjs-2';
 import moment from 'moment'
 
 import UserTable from '../components/Dashboard/UserTable';
 import UserTableDetail from '../components/Dashboard/UserTableDetail';
-import DashboardAction from '../store/Actions/DashboardAction';
+import { UsersAction, ReceiptAction } from '../store/Actions';
 
 const Dash = (props) => {
 	let receiptMonths = {
@@ -65,8 +65,8 @@ const Dash = (props) => {
 	}, [receipts]);
 
 	const didMount = () => {
-		dispatch(DashboardAction.getRecipt());
-		dispatch(DashboardAction.getUser());
+		dispatch(ReceiptAction.getRecipts());
+		dispatch(UsersAction.getUsers());
 	};
 
 

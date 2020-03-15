@@ -3,21 +3,21 @@ import { Table } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 
-import receiptDetailAction from "../store/Actions/ReceiptDetailAction"
+import { ReceiptAction } from "../store/Actions"
 import Img from "./images/images.png"
 import "../index.css"
 
 function mapDispatchToProps(dispatch) {
     return {
         SET_DATA: (obj) => {
-            dispatch(receiptDetailAction.setData(obj));
+            dispatch(ReceiptAction.getReceiptByUserId(obj));
         }
     };
 }
 
 function mapStateToProps(state) {
     return {
-        Data: state.receiptDetailReducer.Data
+        Data: state.receiptReducer.userReceipts
     }
 }
 
