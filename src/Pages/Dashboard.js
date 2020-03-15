@@ -94,8 +94,7 @@ const Dash = (props) => {
 
 
 		if (Array.isArray(receipts) && receipts.length) {
-			props.receipts.map((receipt, index) => {
-				console.log(receipt.month);
+			receipts.map((receipt, index) => {
 				if (receipt.month == 'January' || receipt.month == 'January') {
 					receiptMonths.jan++;
 				} else if (receipt.month === 'Feb' || receipt.month == 'February') {
@@ -185,7 +184,6 @@ export default Dash;
 function UserDetail() {
 	const { userId } = useParams();
 
-	const history = useHistory();
 	const [userDetail, setUserDetail] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 

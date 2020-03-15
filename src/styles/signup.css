@@ -13,9 +13,9 @@
     padding-right: 45px;
     flex-direction: row ;
 }
-html{
+/* html{
     flex: 1;
-}
+} */
 .form-control{
     border: 0ch;
     border-bottom: 2px solid #D0D3D4;
@@ -24,7 +24,7 @@ html{
 .form-control:focus{
     box-shadow: none;
 }
-body{
+/* body{
     justify-content: center;
     align-items: center;
     flex:1;
@@ -34,7 +34,7 @@ body{
     padding-top: 4%;
     background-color: #EFEFEF  ;
 
-}
+} */
 .signup-btn{
     height: 60px;
     width: 160px;

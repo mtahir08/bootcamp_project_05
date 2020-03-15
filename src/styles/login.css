@@ -13,9 +13,9 @@
     padding-right: 45px;
     flex-direction: row ;
 }
-html{
+/* html{
     flex: 1;
-}
+} */
 .form-control{
     border: 0ch;
     border-bottom: 2px solid #D0D3D4;
@@ -24,7 +24,7 @@ html{
 .form-control:focus{
     box-shadow: none;
 }
-body{
+/* body{
     justify-content: center;
     align-items: center;
     flex:1;
@@ -32,9 +32,9 @@ body{
     text-align: center;
     padding-left: 18%;
     /* padding-top: 20%; */
-    background-color: #EFEFEF  ;
+    /* background-color: #EFEFEF  ; */
 
-}
+/* } */
 .login-btn{
     height: 60px;
     width: 160px;

@@ -22,19 +22,14 @@ code {
 .hide {
   display: none;
 }
-.container {
-  /* margin: 20px; */
-
-  background-color: rgb(255, 255, 255);
-
-  width: 60%;
-  height: 60%;
-  /* align-items: center; */
-  color: rgb(0, 0, 0);
-/* margin-left: 50px; */
+.abc {
+display: flex;
+flex-direction:column;
+width: 600px;
+background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
 padding: 3% ;
-/* border: 5px solid rgb(51, 0, 0); */
-border-radius: 40px ;
+border-radius: 20px ;
 transition: 2s;
  font-size: medium;
 }

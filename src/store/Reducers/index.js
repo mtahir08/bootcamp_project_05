@@ -1,26 +1,21 @@
 
+import ActionTypes from '../Actions/ActionsTypes';
 const INITIAL_STATE = {
-    Data: [],
+    users: [],
 }
 
-function TodoReducer(state = INITIAL_STATE, action) {
+function UserReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
 
-        case 'ADD': {
+        case ActionTypes.ADD_USER_SUCCESS: {
             return {
                 ...state,
-                Data: [...state.Data, action.payload]
+                users: [...state.users, action.payload]
             }
         }
-    
-        case 'SETDATA': {
-            return {
-                ...state,
-                todos: action.payload
-            }
-        }
+
         default: return state;
     }
 }
 
-export { TodoReducer };
+export { UserReducer };

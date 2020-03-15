@@ -99,7 +99,9 @@ const AuthAction = {
 				}
 			})
 				.then((resposne) => {
-					if (resposne.status === 200) {
+					if (resposne.status === 401) {
+						localStorage.clear()
+					} else if (resposne.status === 200) {
 						return resposne.json()
 					}
 					throw resposne

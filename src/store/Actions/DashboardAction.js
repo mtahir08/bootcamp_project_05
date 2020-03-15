@@ -13,7 +13,9 @@ const DashboardAction = {
 				}
 			})
 				.then((data) => {
-					if (data.status === 200) {
+					if (data.status === 401) {
+						localStorage.clear()
+					} else if (data.status === 200) {
 						return data.json();
 					}
 					throw data
@@ -41,7 +43,9 @@ const DashboardAction = {
 				}
 			})
 				.then((data) => {
-					if (data.status === 200) {
+					if (data.status === 401) {
+						localStorage.clear()
+					} else if (data.status === 200) {
 						return data.json();
 					}
 					throw data
