@@ -38,6 +38,7 @@ const AuthAction = {
 				})
 				.then((data) => {
 					if (data.data.token) {
+						localStorage.setItem("token", data.data.token)
 						dispatch({ type: ActionTypes.LOGIN, payload: data.data });
 						return (data.data);
 					}
