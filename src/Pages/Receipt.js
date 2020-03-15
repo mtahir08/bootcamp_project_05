@@ -2,13 +2,20 @@ import React, { Component } from 'react'
 import { Table } from "react-bootstrap"
 import { Link } from 'react-router-dom';
 import Fab from '@material-ui/core/Fab';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import AddIcon from '@material-ui/icons/Add';
-
+import {connect} from 'react-redux'; 
 let status = 'all';
 let month = 'all';
 let year = 'all';
+function mapDispatchToProps(dispatch) {
+	return {
+		Add: (data) => dispatch({ type: 'ADD', payload: data }),
+		
+	};
+}
 
-export default class Receipt extends Component {
+class Receipt extends Component {
   state = {
     userDetail: [],
     rows: [],
@@ -19,16 +26,14 @@ export default class Receipt extends Component {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTY0YTEwZmEyZDkwYTAwMDRhYmUxNWMiLCJleHAiOjE1ODM2NzY5NzQsImlhdCI6MTU4MzY3MzM3NH0.ANlAFMpIAczZVYgm_a3rgagMGFol42TurUy2mTnbJAE"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTZjZDkxMTI4YmI4ZTAwMDRmMWQxMGYiLCJyb2xlIjoiQSIsImV4cCI6MTU4NDE5OTAyMCwiaWF0IjoxNTg0MTk1NDIwfQ.Gk6QPDkzNSRlj-tOxJ2F7YF-nqcVLhZjnf3oze7aAzU"
       }
     })
       .then((data) => data.json())
       .then(res2 => {
-        console.log('res2', res2.data.receipt)
-        console.log(res2)
         this.setState({ userDetail: res2.data.receipt })
         this.renderRows(res2.data.receipt);
-        // this.props.Add(this.state.data);
+        this.props.Add(this.state.userDetail);
       })
       .catch((error) => {
         console.log({ error })
@@ -46,7 +51,20 @@ export default class Receipt extends Component {
         <td>{user.month}</td>
         <td>{user.status}</td>
         <td>{user.approvedAt}</td>
-        <Link to={`/receipt/123/${user._id}`}>View Details</Link>
+        <Link 
+        to={`/receipt/${user._id}`}
+        // to={{
+        //   pathname: `/receipt/${user.id}`,
+        //   state: {
+        //    id : user._id
+        //   }}
+        // }
+        >
+
+<Fab color="primary" aria-label="add" style={{width: "30px" , height : "30px" ,"margin-top" : "10px" }}>
+            <VisibilityIcon />
+          </Fab>
+          </Link>
       </tr>
     ));
 
@@ -54,7 +72,6 @@ export default class Receipt extends Component {
   }
   filterData = () => {
 
-    console.log(status, month, year)
     if (status === "all" && month === "all" && year === "all") {
       this.renderRows(this.state.userDetail)
       return;
@@ -70,22 +87,18 @@ export default class Receipt extends Component {
         || (status === status && item.month.toLowerCase() === month && year === "all")
 
       ))
-    console.log(filteredData)
 
     this.renderRows(filteredData);
   }
   handleStatusChange = (e) => {
-    console.log(e.target.value)
     status = e.target.value
     this.filterData()
   }
   handleMonthChange = (e) => {
-    console.log(e.target.value)
     month = e.target.value
     this.filterData()
   }
   handleYearChange = (e) => {
-    console.log(e.target.value)
     year = e.target.value
     this.filterData()
   }
@@ -94,7 +107,7 @@ export default class Receipt extends Component {
 
     return (
       <>
-        <div className="filter">
+          <div className="filter">
           <span className="SelectContainexr" >
             Status
 				 <select
@@ -151,7 +164,7 @@ export default class Receipt extends Component {
             </select>
           </span>
         </div>
-        <div className="container">
+        <div style={{width:"700px"}}>
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -179,3 +192,5 @@ export default class Receipt extends Component {
     )
   }
 }
+
+export default connect(null, mapDispatchToProps)(Receipt) 

@@ -1,11 +1,14 @@
 const ActionTypes = {
-    ADD: "ADD",
-    SETDATA: "SETDATA",
-    SETSTUDENT: 'SETSTUDENT',
-
     ADD_RECEIPT: 'ADD_RECEIPT',
     ADD_RECEIPT_SUCCESS: 'ADD_RECEIPT_SUCCESS',
     ADD_RECEIPT_FAIL: 'ADD_RECEIPT_FAIL',
+    ADD: 'ADD',
+    GETRECEIPT: 'GETRECEIPT',
+    GETUSER: 'GETUSER',
+    EDIT: "EDIT",
+    SETADMINDATA: "SETADMINDATA",
+    LOGIN: "LOGIN",
+    SETSTUDENT: 'SETSTUDENT'
 }
 
-export default ActionTypes
+export default ActionTypes;

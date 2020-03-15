@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import AuthAction from '../store/Actions/AuthAction';
-import { Link} from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 
 import '../styles/login.css';
+import { TextInput } from '../components';
 
 const Login = (props) => {
-	const [input, setInput] = useState({});
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const history = useHistory()
+
 	useEffect(() => {
 		saveDateToStoreAndNav();
 	}, [props.user])
@@ -16,19 +20,14 @@ const Login = (props) => {
 		const data = props.user;
 		if (data.user) {
 			if (data.user.role === "S")
-				props.history.push('/studentDashboard');
+				history.push('/home');
 			else
-				props.history.push('/dashboard');
+				history.push('/dashboard');
 		}
 	}
-	const generalHandler = (e) =>
-		setInput({
-			...input,
-			[e.target.id]: e.target.value
-		});
 
 	const handleSumbit = async () => {
-		props.SETDATA({ email: input.email, password: input.password });
+		props.login({ email, password });
 	};
 
 	return (
@@ -40,26 +39,22 @@ const Login = (props) => {
 			</div>
 			<div className="login-heading" >Login</div>
 			<div className="login-form-container">
-				<div className="form-group">
-					<label className="labels email-label" >Email Address</label>
-					<input
-						type="email"
-						className="form-control"
-						id="email"
-						onChange={generalHandler}
-					/>
-				</div>
-
-				<div className="form-group">
-					<label className="labels password-label" >Password</label>
-					<input
-						type="password"
-						className="form-control"
-						// placeholder="Enter password"
-						id="password"
-						onChange={generalHandler}
-					/>
-				</div>
+				<TextInput
+					name="email"
+					title="Email address"
+					type="email"
+					id="email"
+					value={email}
+					onChange={ev => { setEmail(ev.target.value) }}
+				/>
+				<TextInput
+					name="password"
+					title="Password"
+					type="password"
+					id="password"
+					value={password}
+					onChange={ev => { setPassword(ev.target.value) }}
+				/>
 
 				<div className="form-group">
 					<div className="custom-control custom-checkbox">
@@ -73,7 +68,7 @@ const Login = (props) => {
 
 				<button onClick={handleSumbit} className="btn btn-block login-btn">
 					SUBMIT
-			</button>
+				</button>
 				<div className="btn-signup">
 					Haven't account ?
 				<Link to="/signup"> Sign Up</Link>
@@ -91,9 +86,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		SETDATA: (obj) => {
-			dispatch(AuthAction.setData(obj));
-		}
+		login: (obj) => dispatch(AuthAction.login(obj))
 	};
 }
 

@@ -5,9 +5,8 @@ import Login from './Pages/login';
 import Signup from './Pages/signup';
 // import Input from './input';
 
-// import { CloudinaryImagePage } from './Pages/CloudinaryImagePage';
 // import Dash, { UserDetail } from './Pages/Dashboard';
-// import { ReceiptDetails } from './Pages/Receipt.Detail';
+import ReceiptDetails from "./Pages/ReceiptDetail";
 // import ReceiptAdd from './Pages/receiptAdd';
 import Receipt from './Pages/Receipt';
 import AddReceipt from './Pages/AddReceipt';
@@ -21,10 +20,11 @@ const Routes = () => {
 			<div>
 				<Route exact path="/" component={Login} />
 				<Route exact path="/signup" component={Signup} />
-				<Route exact path="/studentDashboard" component={StudentDashboard} />
+				<Route exact path="/home" component={StudentDashboard} />
 				<Route exact path="/dashboard" component={Side} />
 				<Route exact path="/receipt" component={Receipt} />
 				<Route exact path="/addReceipt" component={AddReceipt} />
+				<Route exact path="/receipt/:userId" component={ReceiptDetails} />
 
 
 
