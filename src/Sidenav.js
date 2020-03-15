@@ -1,21 +1,22 @@
-import React, { Component, Image } from 'react'
-import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
-
-import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-import Dash, { UserDetail } from './Pages/Dashboard';
-import  ReceiptDetails  from './Pages/ReceiptDetail';
-import ReceiptAdd from './Pages/receiptAdd';
-import Headbar from './Pages/Headerbar'
-import Input from './input';
-import { CloudinaryImagePage } from './Pages/CloudinaryImagePage';
-import './sidenav.css'
+import React from 'react'
 import {
     Route, BrowserRouter as Router, Link
 } from "react-router-dom";
+import SideNav from '@trendmicro/react-sidenav';
+
+import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import './sidenav.css'
+
+import Dash, { UserDetail } from './Pages/Dashboard';
+import ReceiptDetails from './Pages/ReceiptDetail';
+import ReceiptAdd from './Pages/receiptAdd';
+import Headbar from './Pages/Headerbar'
+import Input from './input';
+import { SidebarItem } from './components/NavItem';
+import { CloudinaryImagePage } from './Pages/CloudinaryImagePage';
 
 function Side() {
 
-    const user = localStorage.getItem('user');
     return (<>
         <Headbar />
 
@@ -24,8 +25,6 @@ function Side() {
                 <React.Fragment   >
                     <SideNav
                         className="divs"
-
-
                         onSelect={(selected) => {
                             const to = '/' + selected;
                             if (location.pathname !== to) {
@@ -33,53 +32,36 @@ function Side() {
                             }
                         }}
                     >
-
                         <br></br>
                         <SideNav.Toggle />
 
-
-
-
-
                         <SideNav.Nav defaultSelected="dashboard" className="navitems" variant="light"  >
-                            <NavItem eventKey="dashboard" className="Navitems"  >
-                                <NavIcon>
-                                    <i className="fa fa-fw fa-home " />
-                                </NavIcon>
-                                <NavText style={{ color: 'white' }} >
-                                    Dashboard
-                        </NavText >
-                            </NavItem>
+                            <SidebarItem
+                                eventKey="dashboard"
+                                title="Dashboard"
+                                icon=" fa-home"
+                                color="white"
+                            />
 
-                            <NavItem eventKey="input" className="Navitems">
-                                <NavIcon>
-                                    <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
-                                </NavIcon>
-                                <NavText style={{ color: 'black' }}>
+                            <SidebarItem
+                                eventKey="input"
+                                title="Add User"
+                                icon=" fa-home"
+                                color="black"
+                            />
 
-                                    Add User
-                        </NavText>
-
-                            </NavItem>
-
-                            <NavItem eventKey="signout" className="Navitems">
-                                <NavIcon>
-                                    <i className="fa fa-fw fa-home" />
-                                </NavIcon>
-                                <NavText style={{ color: 'black' }}>
-                                    <a href='/' style={{ color: 'black' }}> Signout  </a>
-                                </NavText>
-                            </NavItem>
-
-
+                            <SidebarItem
+                                eventKey="signout"
+                                title={<Link to='/' style={{ color: 'black' }}> Signout  </Link>}
+                                icon=" fa-home"
+                                color="black"
+                            />
 
                         </SideNav.Nav>
 
                     </SideNav>
 
-
-                    <main  >
-
+                    <main>
 
                         <Route path="/input" exact component={Input} />
                         <Route path="/update" component={Input} />
