@@ -2,14 +2,14 @@ import ActionTypes from './ActionsTypes';
 
 const DashboardAction = {
 	getRecipt: () => {
-		return (dispatch) => {
-			const tokenObj = localStorage.getItem('token');
-			const urlReceipt = 'https://uitedemo.herokuapp.com/api/receipt';
+		return (dispatch, getState) => {
+			const token = getState().authReducer.token
+			const urlReceipt = process.env.REACT_APP_ENDPOINT + 'api/receipt';
 			fetch(urlReceipt, {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${tokenObj}`
+					Authorization: `Bearer ${token}`
 				}
 			})
 				.then((data) => {
@@ -30,14 +30,14 @@ const DashboardAction = {
 		};
 	},
 	getUser: () => {
-		return (dispatch) => {
-			const tokenObj = localStorage.getItem('token');
-			const urlReceipt = 'https://uitedemo.herokuapp.com/api/users';
+		return (dispatch, getState) => {
+			const token = getState().authReducer.token
+			const urlReceipt = process.env.REACT_APP_ENDPOINT + 'api/users';
 			fetch(urlReceipt, {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${tokenObj}`
+					Authorization: `Bearer ${token}`
 				}
 			})
 				.then((data) => {
@@ -47,7 +47,6 @@ const DashboardAction = {
 					throw data
 				})
 				.then((res) => {
-					console.log('receipt', res.data.user);
 					dispatch({ type: ActionTypes.GETUSER, payload: res.data.user });
 				})
 				.catch((error) => {

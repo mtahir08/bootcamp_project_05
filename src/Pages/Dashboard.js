@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import { Table } from 'react-bootstrap'
 import { useParams, useHistory } from 'react-router-dom';
-// import '../index.css';
+import { Bar } from 'react-chartjs-2';
+import moment from 'moment'
+
 import UserTable from '../components/Dashboard/UserTable';
 import UserTableDetail from '../components/Dashboard/UserTableDetail';
 import DashboardAction from '../store/Actions/DashboardAction';
-import Side from '../Sidenav';
-import { Bar } from 'react-chartjs-2';
 
 const Dash = (props) => {
-	const [data, setData] = useState([]);
-
 	let receiptMonths = {
 		jan: 0,
 		feb: 0,
@@ -26,20 +24,7 @@ const Dash = (props) => {
 		nov: 0,
 		dec: 0
 	};
-	let userMonths = {
-		jan: 0,
-		feb: 0,
-		march: 0,
-		april: 0,
-		may: 0,
-		june: 0,
-		july: 0,
-		aug: 0,
-		sep: 0,
-		oct: 0,
-		nov: 0,
-		dec: 0
-	};
+	let userMonths = new Array(12).fill(0)
 	const label = [
 		'January',
 		'February',
@@ -64,46 +49,33 @@ const Dash = (props) => {
 		datasets: []
 	});
 
+	const users = useSelector(state => state.dashboardReducer.user)
+	const receipts = useSelector(state => state.dashboardReducer.receipt)
+	const dispatch = useDispatch()
 	useEffect(() => {
-
 		didMount();
 	}, []);
 
 	useEffect(() => {
-		willRrecipeProps();
-	}, [props.receipts]);
+		setUser();
+	}, [users]);
 
-	const willRrecipeProps = () => {
-		if (props.users[1]) {
-			props.users.map((user) => {
-				console.log(user.createdAt);
-				const month = user.createdAt.substr(5, 2);
-				console.log(month);
-				if (month == '01') {
-					userMonths.jan++;
-				} else if (month === '02') {
-					userMonths.feb++;
-				} else if (month === '03') {
-					userMonths.march++;
-				} else if (month === '04') {
-					userMonths.april++;
-				} else if (month === '05') {
-					userMonths.may++;
-				} else if (month === '06') {
-					userMonths.june++;
-				} else if (month === '07') {
-					userMonths.july++;
-				} else if (month === '08') {
-					userMonths.aug++;
-				} else if (month === '09') {
-					userMonths.sep++;
-				} else if (month === '10') {
-					userMonths.oct++;
-				} else if (month === '11') {
-					userMonths.nov++;
-				} else if (month === '12') {
-					userMonths.dec++;
-				}
+	useEffect(() => {
+		willRrecipeProps();
+	}, [receipts]);
+
+	const didMount = () => {
+		dispatch(DashboardAction.getRecipt());
+		dispatch(DashboardAction.getUser());
+	};
+
+
+	const setUser = () => {
+		if (Array.isArray(users) && users.length) {
+			users.forEach((user) => {
+				const timeObject = moment(user.createdAt).toObject()
+				const month = Number(timeObject.months)
+				userMonths[month] = userMonths[month] + 1
 			});
 			setBarDataUser({
 				datasets: [
@@ -112,27 +84,16 @@ const Dash = (props) => {
 						backgroundColor: 'rgba(75,192,192,1)',
 						borderColor: 'rgba(0,0,0,1)',
 						borderWidth: 2,
-						data: [
-							userMonths.jan,
-							userMonths.feb,
-							userMonths.march,
-							userMonths.april,
-							userMonths.may,
-							userMonths.june,
-							userMonths.july,
-							userMonths.aug,
-							userMonths.sep,
-							userMonths.oct,
-							userMonths.nov,
-							userMonths.dec
-						]
+						data: userMonths
 					}
 				]
 			});
-			console.log(props.users);
 		}
+	}
+	const willRrecipeProps = () => {
 
-		if (props.receipts[1]) {
+
+		if (Array.isArray(receipts) && receipts.length) {
 			props.receipts.map((receipt, index) => {
 				console.log(receipt.month);
 				if (receipt.month == 'January' || receipt.month == 'January') {
@@ -168,30 +129,13 @@ const Dash = (props) => {
 						backgroundColor: 'rgba(75,192,192,1)',
 						borderColor: 'rgba(0,0,0,1)',
 						borderWidth: 2,
-						data: [
-							receiptMonths.jan,
-							receiptMonths.feb,
-							receiptMonths.march,
-							receiptMonths.april,
-							receiptMonths.may,
-							receiptMonths.june,
-							receiptMonths.july,
-							receiptMonths.aug,
-							receiptMonths.sep,
-							receiptMonths.oct,
-							receiptMonths.nov,
-							receiptMonths.dec
-						]
+						data: Object.values(receiptMonths)
 					}
 				]
 			});
-			console.log(props.receipts);
 		}
 	};
-	const didMount = () => {
-		props.GETRECEIPT({});
-		props.GETUSER({});
-	};
+
 
 	const graph = () => {
 		return (
@@ -231,42 +175,12 @@ const Dash = (props) => {
 		<div>
 
 			<div className="container">
-				<div>{graph()}</div>
-				<Table striped bordered hover>
-					<UserTable />
-					<UserTableDetail userData={data} />
-				</Table>
+				{graph()}
 			</div>
 		</div>
 	);
 }
-
-function mapStateToProps(state) {
-	console.log(state.dashboardReducer.user);
-	return {
-		user: state.users,
-		token: state.token,
-		users: state.dashboardReducer.user,
-		receipts: state.dashboardReducer.receipt
-	};
-}
-
-function mapDispatchToProps(dispatch) {
-	return {
-		Add: (data) => dispatch({ type: 'ADD', payload: data }),
-		// GET: (data) => dispatch({ type: 'GET', payload: data }),
-		GETRECEIPT: (obj) => {
-			console.log(obj);
-			dispatch(DashboardAction.getRecipt(obj));
-		},
-		GETUSER: (obj) => {
-			console.log(obj);
-			dispatch(DashboardAction.getUser(obj));
-		}
-	};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dash);
+export default Dash;
 
 function UserDetail() {
 	const { userId } = useParams();

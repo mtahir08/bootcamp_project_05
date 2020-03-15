@@ -1,18 +1,18 @@
+import ActionTypes from '../Actions/ActionsTypes';
 const INITIAL_STATE = {
-	user: [{}],
-	receipt: [{}]
+	user: [],
+	receipt: []
 };
 
 function dashboardReducer(state = INITIAL_STATE, action) {
-	console.log(action);
 	switch (action.type) {
-		case 'GETUSER': {
+		case ActionTypes.GETUSER: {
 			return {
 				...state,
 				user: action.payload
 			};
 		}
-		case 'GETRECEIPT': {
+		case ActionTypes.GETRECEIPT: {
 			return {
 				...state,
 				receipt: action.payload
